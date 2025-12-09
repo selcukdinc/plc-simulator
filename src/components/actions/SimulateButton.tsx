@@ -1,8 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/analytics';
+import { logEvent } from '../../helpers/firebase';
 
 import { Store } from '../../interface';
 import { CYCLE_TIME } from '../../consts/consts';
@@ -57,7 +56,7 @@ const SimulateButton: React.FC = () => {
   });
 
   const handleClick = () => {
-    firebase.analytics().logEvent('click_simulation');
+    logEvent('click_simulation');
     if (simulation) {
       dispatch({ type: SET_SIMULATION, payload: { value: false } });
     } else {

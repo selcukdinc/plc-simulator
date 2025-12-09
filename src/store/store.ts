@@ -2,15 +2,14 @@ import { createMigrate, persistReducer } from "redux-persist";
 import storage from "localforage";
 import { createStore, compose } from "redux";
 import { persistStore } from "redux-persist";
-import "firebase/compat/firestore";
 
 import { migrations } from "./const";
 import { IMPORT_PROJECT, OPEN_ALERT_SNACKBAR } from "./types";
-import firebase from "../helpers/firebase";
+import firebase, { firestore as firebaseFirestore } from "../helpers/firebase";
 import { enablePatches } from "immer";
 import simulator from "./simulator";
 
-export const firestore = firebase.firestore();
+export const firestore = firebaseFirestore;
 
 const persistConfig = {
   key: "root",
@@ -41,7 +40,7 @@ export const persistor = persistStore(store, { manualPersist: true } as any);
 const shareUuid = window.location.pathname.split("/")[1];
 
 export const loadDiagram = () => {
-  if (shareUuid) {
+  if (shareUuid && firestore) {
     const shareRef: firebase.firestore.DocumentReference<firebase.firestore.DocumentData> = firestore
       .collection("projects_public")
       .doc(shareUuid);
@@ -76,6 +75,16 @@ export const loadDiagram = () => {
         console.error("Error getting document:", error);
         persistor.persist();
       });
+  } else if (shareUuid && !firestore) {
+    store.dispatch({
+      type: OPEN_ALERT_SNACKBAR,
+      payload: {
+        color: "warning",
+        open: true,
+        text: "Cloud loading is disabled because Firebase config is missing.",
+      },
+    });
+    persistor.persist();
   } else {
     persistor.persist();
   }

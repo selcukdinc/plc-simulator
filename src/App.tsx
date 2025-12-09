@@ -2,8 +2,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import './index.css';
-import 'firebase/compat/analytics';
-import firebase from './helpers/firebase';
+import { analytics, firebaseEnabled } from './helpers/firebase';
 import ErrorBoundary from './components/ErrorBoundary';
 import Simulator from './components/Simulator';
 import Loading from './components/Loading';
@@ -16,7 +15,9 @@ import { CustomDragLayer } from './CustomDragLayer';
 
 const theme = createTheme();
 
-firebase.analytics();
+if (firebaseEnabled && analytics) {
+  analytics.logEvent('app_init');
+}
 
 loadDiagram();
 

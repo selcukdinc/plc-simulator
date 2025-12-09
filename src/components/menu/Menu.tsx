@@ -1,13 +1,11 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/analytics';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 import { Store } from '../../interface';
 import { UNDO, REDO, LOAD_EMPTY, LOAD_SAMPLE } from '../../store/types';
 import { BG_MENU } from '../../consts/colors';
-import { auth } from '../../helpers/firebase';
+import { auth, firebaseEnabled, logEvent } from '../../helpers/firebase';
 import useOnline from './useOnline';
 import { ReactComponent as FileText } from '../../svg/fileText.svg';
 import { ReactComponent as FileEmpty } from '../../svg/fileEmpty.svg';
@@ -32,12 +30,12 @@ export default function Menu() {
   const dispatch = useDispatch();
 
   const dispatchAction = (actionType: string) => {
-    firebase.analytics().logEvent('load_diagram', { action: actionType });
+    logEvent('load_diagram', { action: actionType });
     dispatch({ type: actionType });
     setPopupOpen(false);
   };
   const openPopup = (action: string) => {
-    firebase.analytics().logEvent('open_load_popup');
+    logEvent('open_load_popup');
     setAction(action);
     setPopupOpen(true);
   };
@@ -55,7 +53,7 @@ export default function Menu() {
       <SvgButton onClick={() => dispatchAction(REDO)} disabled={!canRedo} Svg={Redo} />
       <SvgButton onClick={() => openPopup(LOAD_SAMPLE)} Svg={FileText} />
       <SvgButton onClick={() => openPopup(LOAD_EMPTY)} Svg={FileEmpty} />
-      {online ? (
+      {online && firebaseEnabled ? (
         user ? (
           <ShareButton user={user} />
         ) : (

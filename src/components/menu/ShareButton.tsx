@@ -24,6 +24,17 @@ const ShareButton: React.FC<Props> = (props: Props) => {
   const share = () => {
     setShareDisable(true);
     setTimeout(() => setShareDisable(false), 3000);
+    if (!firestore) {
+      dispatch({
+        type: OPEN_ALERT_SNACKBAR,
+        payload: {
+          color: 'warning',
+          open: true,
+          text: 'Sharing is disabled because Firebase config is missing.',
+        },
+      });
+      return;
+    }
     if (diagramSaved) return shareLink(document.URL);
     const { uid } = user;
     const state = store.getState() as unknown as Store;

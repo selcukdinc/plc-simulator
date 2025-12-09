@@ -17,8 +17,7 @@ import ActionButton from './ActionButton';
 import EditElementButton from './EditElementButton';
 import SimulateButton from './SimulateButton';
 import { Box } from '@mui/material';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/analytics';
+import { logEvent } from '../../helpers/firebase';
 
 export default function Actions() {
   const objectUuid = useSelector((state: Store) => state.temp.selectedUuid);
@@ -29,7 +28,7 @@ export default function Actions() {
   const handleClick = (actionType: string) => {
     dispatch({ type: actionType });
     if (actionType !== DELETE_OBJECT) {
-      firebase.analytics().logEvent('move_object_click');
+      logEvent('move_object_click');
     }
   };
   const isElement = Object.keys(elements).includes(objectUuid);
