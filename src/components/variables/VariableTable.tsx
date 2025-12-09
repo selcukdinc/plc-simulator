@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { shallowEqual, useSelector } from 'react-redux';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import { shallowEqual, useSelector } from "react-redux";
+import styled from "styled-components";
 
-import { Store } from '../../interface';
-import { BG_VARIABLES, VAR_TABLE_BORDER } from '../../consts/colors';
+import { Store } from "../../interface";
+import { BG_VARIABLES, VAR_TABLE_BORDER } from "../../consts/colors";
 
-import VariableTableFoot from './VariableTableFoot';
-import VariableTableVarRow from './VariableTableVarRow';
-import { BORDER_SIZE, DELETE_COL_WIDTH, TYPE_COL_WIDTH, VALUE_COL_WIDTH } from '../../consts/variableTableStyles';
+import VariableTableFoot from "./VariableTableFoot";
+import VariableTableVarRow from "./VariableTableVarRow";
+import { BORDER_SIZE, DELETE_COL_WIDTH, TYPE_COL_WIDTH, VALUE_COL_WIDTH } from "../../consts/variableTableStyles";
 
 const Body = styled.tbody`
   display: block;
@@ -19,6 +19,39 @@ const Container = styled.div`
   background: ${BG_VARIABLES};
   flex: 1;
   min-width: 320px;
+`;
+const Banner = styled.a`
+  align-items: center;
+  background: #e6f0ff;
+  border-top: ${BORDER_SIZE} solid ${VAR_TABLE_BORDER};
+  color: #0f172a;
+  display: flex;
+  flex-direction: row;
+  font-size: 1.02rem;
+  font-weight: 650;
+  gap: 0.45rem;
+  justify-content: center;
+  letter-spacing: 0.01em;
+  padding: 0.75rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  transition: background 120ms ease;
+
+  strong {
+    font-size: 1.08rem;
+    font-weight: 750;
+  }
+
+  .sub {
+    color: #1f2937;
+    font-size: 0.98rem;
+    font-weight: 550;
+    opacity: 0.9;
+  }
+
+  :hover {
+    background: #d9e8ff;
+  }
 `;
 const DeletePlaceholder = styled.th`
   flex: 0 0 ${DELETE_COL_WIDTH};
@@ -76,9 +109,9 @@ const VariableTable: React.FC<Props> = ({ mobileUI }: Props) => {
       Object.keys(state.variables)
         .map((id) => id)
         .filter((id) => !state.variables[id].parrent),
-    shallowEqual,
+    shallowEqual
   );
-  const [selectedUUID, setSelectedUUID] = useState('');
+  const [selectedUUID, setSelectedUUID] = useState("");
   const displayVarHelp = variableIDs.length === 0;
 
   return (
@@ -109,6 +142,14 @@ const VariableTable: React.FC<Props> = ({ mobileUI }: Props) => {
         </Table>
       </Container>
       <VariableTableFoot displayVarHelp={displayVarHelp} mobileUI={mobileUI} />
+      {!mobileUI && (
+        <Banner href="https://studio.rungs.dev" target="_blank" rel="noopener noreferrer">
+          <span className="sub">
+            Build and test Structured Text logic at{" "}
+            <span style={{ textDecoration: "underline" }}>studio.rungs.dev</span>{" "}
+          </span>
+        </Banner>
+      )}
     </VariableTab>
   );
 };
