@@ -1,7 +1,7 @@
 {
   "name": "plc-simulator",
   "homepage": "https://app.plcsimulator.online/",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "private": true,
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
