@@ -145,8 +145,7 @@ const VariableTable: React.FC<Props> = ({ mobileUI }: Props) => {
       {!mobileUI && (
         <Banner href="https://studio.rungs.dev" target="_blank" rel="noopener noreferrer">
           <span className="sub">
-            Build and test Structured Text logic at{" "}
-            <span style={{ textDecoration: "underline" }}>studio.rungs.dev</span>{" "}
+            <span style={{ textDecoration: "underline" }}>studio.rungs.dev</span> — now with Structured Text and Ladder Diagram support!
           </span>
         </Banner>
       )}
