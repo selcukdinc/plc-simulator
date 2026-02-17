@@ -109,7 +109,7 @@ const VariableTable: React.FC<Props> = ({ mobileUI }: Props) => {
       Object.keys(state.variables)
         .map((id) => id)
         .filter((id) => !state.variables[id].parrent),
-    shallowEqual
+    shallowEqual,
   );
   const [selectedUUID, setSelectedUUID] = useState("");
   const displayVarHelp = variableIDs.length === 0;
@@ -143,9 +143,10 @@ const VariableTable: React.FC<Props> = ({ mobileUI }: Props) => {
       </Container>
       <VariableTableFoot displayVarHelp={displayVarHelp} mobileUI={mobileUI} />
       {!mobileUI && (
-        <Banner href="https://studio.rungs.dev" target="_blank" rel="noopener noreferrer">
+        <Banner href="https://studio.rungs.dev" target="_blank" rel="noopener">
           <span className="sub">
-            <span style={{ textDecoration: "underline" }}>studio.rungs.dev</span> — now with Structured Text and Ladder Diagram support!
+            <span style={{ textDecoration: "underline" }}>studio.rungs.dev</span> — now with Structured Text and Ladder
+            Diagram support!
           </span>
         </Banner>
       )}
