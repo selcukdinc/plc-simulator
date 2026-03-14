@@ -296,7 +296,7 @@ const setTimerOut = (element: ElementTimer, RLO: boolean, simulation: boolean, v
   const timerUuid = element.parameters.inOut[0].uuid;
 
   if (executedTimers.has(timerUuid)) {
-    element.out = variables[Q].value as boolean;
+    element.out = RLO && (variables[Q].value as boolean);
     return element.out;
   }
   executedTimers.add(timerUuid);
