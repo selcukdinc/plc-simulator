@@ -13,6 +13,8 @@ import { ReactComponent as Redo } from '../../svg/redo.svg';
 import { ReactComponent as Undo } from '../../svg/undo.svg';
 import { ReactComponent as SvgWifiOff } from '../../svg/wifi-off.svg';
 import SvgButton from '../SvgButton';
+import ExportButton from './ExportButton';
+import ImportButton from './ImportButton';
 import ShareButton from './ShareButton';
 import SignButton from './SignButton';
 import SignOut from './SignOut';
@@ -53,6 +55,8 @@ export default function Menu() {
       <SvgButton onClick={() => dispatchAction(REDO)} disabled={!canRedo} Svg={Redo} />
       <SvgButton onClick={() => openPopup(LOAD_SAMPLE)} Svg={FileText} />
       <SvgButton onClick={() => openPopup(LOAD_EMPTY)} Svg={FileEmpty} />
+      <ExportButton />
+      <ImportButton />
       {online && firebaseEnabled ? (
         user ? (
           <ShareButton user={user} />
