@@ -9,7 +9,7 @@ export default function ToolboxIcon({ Svg }: Props) {
   return (
     <Box
       sx={{
-        background: 'rgba(255, 255, 255, 0.7)',
+        background: 'var(--color-button-bg)',
         borderRadius: '10%',
         display: 'flex',
         position: 'absolute',

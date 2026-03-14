@@ -17,8 +17,6 @@ const hasRequiredConfig = Boolean(config.apiKey && config.authDomain && config.p
 
 if (hasRequiredConfig) {
   firebase.initializeApp(config);
-} else {
-  console.warn("Firebase config missing; Firebase features are disabled.");
 }
 
 const createDisabledAuth = () => {

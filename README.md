@@ -1,51 +1,53 @@
 # PLC Simulator Online
 
-Welcome to the PLC Simulator project! This project provides an open-source PLC (Programmable Logic Controller) simulator designed to help users practice and develop their PLC programming skills.
+Web tabanlı PLC ladder logic simülatörü. Ladder diyagram çizin, simülasyonu gerçek zamanlı çalıştırın.
 
-## About
+> **Upstream:** [codingplc/plc-simulator](https://github.com/codingplc/plc-simulator) (GPL v3)
+> **Bu fork:** [selcukdinc/plc-simulator](https://github.com/selcukdinc/plc-simulator) — [devloop.com.tr/plc-sim](https://devloop.com.tr/plc-sim)
 
-The PLC Simulator is a tool for simulating the behavior of PLCs, enabling users to write and test PLC code without needing physical hardware. The simulator supports Ladder Diagram language and provides an environment where users can learn, experiment, and validate their PLC programs.
+## Özellikler
 
-## Installation
+- Ladder Diagram editörü (sürükle & bırak)
+- Gerçek zamanlı PLC simülasyonu (66ms cycle)
+- JSON export / import (yerel kayıt)
+- **Dark mode** (Menü sağ üst köşeden toggle)
+- Desteklenen element tipleri: XIC, XIO, OSP, OSN, OTE, OTL, OTU, OTN, TON, TOF, TONR, CTU, CTD, CTUD, ADD, SUB, MUL, DIV, EQU, NEQ, GRT, GEQ, LES, LEQ, MOV
 
-### Clone the Repository:
+## Kurulum
 
 ```bash
-git clone https://github.com/codingplc/plc-simulator.git
+git clone https://github.com/selcukdinc/plc-simulator.git
 cd plc-simulator
-```
-
-### Install Dependencies:
-
-```bash
 yarn install
+yarn start        # localhost:3000
 ```
 
-### Run the Simulator:
+## Geliştirme
 
 ```bash
-yarn start
+yarn start        # Dev sunucusu
+yarn build        # Production build → build/
 ```
 
-## Contributing
+## Deploy
 
-We welcome contributions from the community! Please follow these steps to contribute:
+`selcuk-dev` branch'ine `[deploy]` içeren bir commit mesajıyla push etmek GitHub Actions'ı tetikler ve `devloop.com.tr/plc-sim`'e deploy eder.
 
-1. **Fork the Repository**: Click the 'Fork' button and clone your forked repository locally.
-2. **Create a New Branch**: Run `git checkout -b branch-name` to create a new branch for your changes.
-3. **Make Your Changes**: Implement your changes in the project.
-4. **Commit Your Changes**: Commit your changes using `git commit -m "Description of changes"`.
-5. **Push to GitHub**: Push your changes with `git push origin branch-name`.
-6. **Submit a Pull Request**: Create a pull request from your branch to the main repository.
+## Fork'a Özgü Değişiklikler
 
-## License
+| Özellik | Açıklama |
+|---------|----------|
+| **Dark mode** | CSS custom properties tabanlı tema sistemi; menü butonuyla toggle |
+| **JSON Export/Import** | Diyagramı yerel dosyaya kaydetme/yükleme |
+| **TON timer bug fix** | `executedTimers` Set ile double-execution düzeltildi |
+| **Firebase sessiz hata** | Firebase config yoksa konsol uyarısı yok, sessizce devre dışı |
+| **subpath deploy** | `homepage: /plc-sim`, shareUuid yolu düzeltildi |
+| **GitHub Actions** | Otomatik deploy workflow |
 
-This project is licensed under the GNU General Public License v3.0. See the [LICENSE](https://github.com/codingplc/plc-simulator/blob/main/LICENSE) file for details.
+## Lisans
 
-## Reporting Issues
+[GNU GPL v3.0](LICENSE) — kaynak kodu açık kalmak zorunda.
 
-Please use the [Issues](https://github.com/codingplc/plc-simulator/issues) section to report bugs or request new features. Provide as much detail as possible to help us address your issues effectively.
+---
 
-## Contact
-
-If you have any questions, feel free to reach out via [email](mailto:info@codingplc.com).
+*Upstream proje: [app.plcsimulator.online](https://app.plcsimulator.online) · [CodingPLC](https://www.codingplc.com/)*

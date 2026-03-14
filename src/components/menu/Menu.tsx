@@ -6,6 +6,8 @@ import { Store } from '../../interface';
 import { UNDO, REDO, LOAD_EMPTY, LOAD_SAMPLE } from '../../store/types';
 import { BG_MENU } from '../../consts/colors';
 import { auth, firebaseEnabled, logEvent } from '../../helpers/firebase';
+import { useColorMode } from '../../App';
+import { Brightness4, Brightness7 } from '@mui/icons-material';
 import useOnline from './useOnline';
 import { ReactComponent as FileText } from '../../svg/fileText.svg';
 import { ReactComponent as FileEmpty } from '../../svg/fileEmpty.svg';
@@ -30,6 +32,7 @@ export default function Menu() {
   const [user] = useAuthState(auth);
   const online = useOnline();
   const dispatch = useDispatch();
+  const { mode, toggleColorMode } = useColorMode();
 
   const dispatchAction = (actionType: string) => {
     logEvent('load_diagram', { action: actionType });
@@ -68,6 +71,9 @@ export default function Menu() {
       )}
       <SignOut />
       <Help />
+      <IconButton onClick={toggleColorMode} size="small" sx={{ margin: '0.25rem', color: 'inherit' }} title={mode === 'dark' ? 'Light mode' : 'Dark mode'}>
+        {mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
+      </IconButton>
       <Snackbar
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         open={popupOpen}

@@ -18,6 +18,7 @@ import EditElementButton from './EditElementButton';
 import SimulateButton from './SimulateButton';
 import { Box } from '@mui/material';
 import { logEvent } from '../../helpers/firebase';
+import { BG_ACTIONS } from '../../consts/colors';
 
 export default function Actions() {
   const objectUuid = useSelector((state: Store) => state.temp.selectedUuid);
@@ -43,7 +44,7 @@ export default function Actions() {
   return (
     <Box
       sx={{
-        background: '#e8d0f0',
+        background: BG_ACTIONS,
         display: 'flex',
         flex: '1 1 auto',
         gridArea: 'actions',

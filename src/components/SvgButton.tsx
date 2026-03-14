@@ -12,7 +12,7 @@ const Square = styled.div`
   }
 `;
 const SvgContainer = styled.div`
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--color-button-bg);
   border-radius: 10%;
   display: flex;
   position: absolute;

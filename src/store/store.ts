@@ -37,7 +37,11 @@ export const store = createStore(persistedReducer, composeEnhancers());
 
 export const persistor = persistStore(store, { manualPersist: true } as any);
 
-const shareUuid = window.location.pathname.split("/")[1];
+const base = process.env.PUBLIC_URL || '';
+const pathAfterBase = window.location.pathname.startsWith(base)
+  ? window.location.pathname.slice(base.length)
+  : window.location.pathname;
+const shareUuid = pathAfterBase.split('/').filter(Boolean)[0] || '';
 
 export const loadDiagram = () => {
   if (shareUuid && firestore) {
@@ -75,16 +79,6 @@ export const loadDiagram = () => {
         console.error("Error getting document:", error);
         persistor.persist();
       });
-  } else if (shareUuid && !firestore) {
-    store.dispatch({
-      type: OPEN_ALERT_SNACKBAR,
-      payload: {
-        color: "warning",
-        open: true,
-        text: "Cloud loading is disabled because Firebase config is missing.",
-      },
-    });
-    persistor.persist();
   } else {
     persistor.persist();
   }

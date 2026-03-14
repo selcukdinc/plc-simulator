@@ -1,3 +1,48 @@
+/* ===== Theme Color Variables ===== */
+:root {
+  --color-element: #3D3D3D;
+  --color-element-not-cfg: #FF0000;
+  --color-out-on: #13A465;
+  --color-selected: #1973C8;
+  --color-progress: #B7F5DA;
+  --color-bg-diagram: #FFFFFF;
+  --color-bg-error: #FFC2C2;
+  --color-bg-menu: #FEF0AE;
+  --color-bg-toolbox: #D3EEDE;
+  --color-bg-variables: #EBF5FF;
+  --color-bg-warning: #FEF0AE;
+  --color-bg-actions: #e8d0f0;
+  --color-bg-footer: #abcdef;
+  --color-block-param-bg: rgba(255, 255, 255, 0.7);
+  --color-var-table-border: #CCCCCC;
+  --color-var-selected: #C2E1FF;
+  --color-sub-var-selected: #C2E1FF;
+  --color-drop-highlight: #EDB51C;
+  --color-button-bg: rgba(255, 255, 255, 0.7);
+}
+
+[data-theme="dark"] {
+  --color-element: #c0c0c0;
+  --color-element-not-cfg: #ff6b6b;
+  --color-out-on: #1ec97e;
+  --color-selected: #4d9de0;
+  --color-progress: #0a3d22;
+  --color-bg-diagram: #1e1e1e;
+  --color-bg-error: #5a1a1a;
+  --color-bg-menu: #252535;
+  --color-bg-toolbox: #1e2e24;
+  --color-bg-variables: #1e2535;
+  --color-bg-warning: #302810;
+  --color-bg-actions: #2e1e3e;
+  --color-bg-footer: #1a1a2e;
+  --color-block-param-bg: rgba(0, 0, 0, 0.5);
+  --color-var-table-border: #3a3a3a;
+  --color-var-selected: #1a3a5a;
+  --color-sub-var-selected: #1a3a5a;
+  --color-drop-highlight: #EDB51C;
+  --color-button-bg: rgba(255, 255, 255, 0.1);
+}
+
 @font-face {
   font-family: 'Virgil';
   src: url('https://excalidraw.com/Virgil.woff2');

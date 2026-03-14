@@ -1,11 +1,11 @@
 # Roadmap
 
-## v1.7 — Hızlı Düzeltmeler
+## v1.7 — Hızlı Düzeltmeler ✅
 > Öncelikli, kısa vadeli iyileştirmeler
 
-- [ ] Firebase hata mesajını kaldır (Firebase config yoksa sessizce devam et)
-- [ ] Karanlık mod (Dark mode) — tema sistemi kurulacak, tüm bileşenler buna göre güncellenecek
-- [ ] Genel UI modernizasyonu — tipografi, boşluklar, renk paleti
+- [x] Firebase hata mesajını kaldır (Firebase config yoksa sessizce devam et)
+- [x] Karanlık mod (Dark mode) — CSS custom properties + MUI palette mode entegrasyonu
+- [x] Genel UI modernizasyonu — sistem font ailesi, temiz renk paleti, MUI dark theme
 
 ---
 
@@ -73,3 +73,12 @@
 - [ ] Aynı FB instance'ının birden fazla rung'da kullanımına dair kullanıcı uyarısı
 - [ ] Unit test altyapısı (`cycleScan` için)
 - [ ] `cycleScan.ts` büyüdükçe dosyayı element kategorilerine göre böl
+
+---
+
+## Değişiklik Geçmişi
+
+| Sürüm | Tarih | Değişiklik |
+|-------|-------|------------|
+| v1.7 | 2026-03-14 | Dark mode (CSS vars + MUI), Firebase sessiz hata, subpath shareUuid fix |
+| v1.6.x | — | TON timer bug fix, JSON export/import, deploy workflow |

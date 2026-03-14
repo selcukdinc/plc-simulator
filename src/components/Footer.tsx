@@ -2,7 +2,7 @@ import { Box, Link, Typography } from '@mui/material';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  background-color: #abcdef;
+  background-color: var(--color-bg-footer);
   bottom: 0;
   display: flex;
   grid-area: footer;
@@ -20,7 +20,7 @@ type Props = {
 export default function Footer({ mobileUI }: Props) {
   return (
     <Container>
-      <Box sx={{ color: '#5C5C5C' }} mx={1} my="auto">
+      <Box sx={{ color: 'text.secondary' }} mx={1} my="auto">
         <Typography variant="body2">
           {'© '}
           <Link href="https://www.codingplc.com/" color="inherit" target="_blank" rel="noopener noreferrer">
@@ -37,7 +37,7 @@ export default function Footer({ mobileUI }: Props) {
         </Typography>
       </Box>
       {!mobileUI && (
-        <Box sx={{ color: '#5C5C5C' }} mx={1} my="auto">
+        <Box sx={{ color: 'text.secondary' }} mx={1} my="auto">
           <Typography variant="body2">
             <Link href="https://github.com/selcukdinc/plc-simulator" color="inherit" target="_blank" rel="noopener noreferrer">
               Fork by selcukdinc
