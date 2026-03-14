@@ -1,6 +1,6 @@
 {
   "name": "plc-simulator",
-  "homepage": "https://app.plcsimulator.online/",
+  "homepage": "/plc-sim",
   "version": "1.6.5",
   "private": true,
   "dependencies": {
