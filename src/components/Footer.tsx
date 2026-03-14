@@ -1,5 +1,4 @@
-import { Box, Button, Link, Typography } from '@mui/material';
-import { FiInfo, FiMail } from 'react-icons/fi';
+import { Box, Link, Typography } from '@mui/material';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -21,32 +20,35 @@ type Props = {
 export default function Footer({ mobileUI }: Props) {
   return (
     <Container>
-      {!mobileUI && (
-        <Box sx={{ color: '#5C5C5C' }} my="auto">
-          <Button color="inherit" href="https://plcsimulator.online/about" target="_blank" rel="noopener noreferrer" size="small" startIcon={<FiInfo />}>
-            About
-          </Button>
-          <Button color="inherit" target="_blank" rel="noopener noreferrer" href="https://plcsimulator.online/contact" size="small" startIcon={<FiMail />}>
-            Contact
-          </Button>
-        </Box>
-      )}
-      <Box mx={1} my="auto">
-        <Typography variant="body2" align="center">
-          <Link href="https://www.patreon.com/plc_simulator_online" color="inherit" target="_blank" rel="noopener noreferrer">
-            SUPPORT US ON PATREON
-          </Link>
-        </Typography>
-      </Box>
       <Box sx={{ color: '#5C5C5C' }} mx={1} my="auto">
-        <Typography variant="body2" align="center" color="inherit">
+        <Typography variant="body2">
           {'© '}
           <Link href="https://www.codingplc.com/" color="inherit" target="_blank" rel="noopener noreferrer">
             CodingPLC
-          </Link>{' '}
-          {new Date().getFullYear()}
+          </Link>
+          {' · '}
+          <Link href="https://github.com/codingplc/plc-simulator" color="inherit" target="_blank" rel="noopener noreferrer">
+            Original Project
+          </Link>
+          {' · '}
+          <Link href="https://app.plcsimulator.online" color="inherit" target="_blank" rel="noopener noreferrer">
+            Original Site
+          </Link>
         </Typography>
       </Box>
+      {!mobileUI && (
+        <Box sx={{ color: '#5C5C5C' }} mx={1} my="auto">
+          <Typography variant="body2">
+            <Link href="https://github.com/selcukdinc/plc-simulator" color="inherit" target="_blank" rel="noopener noreferrer">
+              Fork by selcukdinc
+            </Link>
+            {' · '}
+            <Link href="https://devloop.com.tr" color="inherit" target="_blank" rel="noopener noreferrer">
+              devloop.com.tr
+            </Link>
+          </Typography>
+        </Box>
+      )}
     </Container>
   );
 }
