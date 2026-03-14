@@ -9,13 +9,14 @@
 
 ---
 
-## v1.8 — Profesyonel UI
+## v1.8 — Profesyonel UI ✅
 > Görsel kimlik yenileme
 
-- [ ] Tutarlı design system (renk, gölge, border-radius token'ları)
-- [ ] Toolbar yeniden tasarımı — tooltip'ler, gruplandırma
-- [ ] Responsive iyileştirmeler
-- [ ] Animasyonlar — simülasyon çalışırken enerji akışının görsel olarak belirginleşmesi
+- [x] Tutarlı design system — CSS token'ları: `--radius-*`, `--shadow-*`, `--transition-*`
+- [x] Toolbar yeniden tasarımı — MUI Tooltip'ler tüm butonlara eklendi, görsel gruplandırma divider'ları
+- [x] Dark mode bug fix — ActionButton / SimulateButton hardcoded renk düzeltildi
+- [x] Animasyonlar — SimulateButton çalışırken pulse, enerji taşıyan power rail glow efekti
+- [ ] Responsive iyileştirmeler (bir sonraki sürüme ertelendi)
 
 ---
 
@@ -80,5 +81,6 @@
 
 | Sürüm | Tarih | Değişiklik |
 |-------|-------|------------|
+| v1.8 | 2026-03-14 | Profesyonel UI: design tokens, tooltip'ler, toolbar gruplandırma, dark mode bug fix, simülasyon animasyonu |
 | v1.7 | 2026-03-14 | Dark mode (CSS vars + MUI), Firebase sessiz hata, subpath shareUuid fix |
 | v1.6.x | — | TON timer bug fix, JSON export/import, deploy workflow |

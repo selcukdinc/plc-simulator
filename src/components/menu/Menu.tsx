@@ -52,12 +52,15 @@ export default function Menu() {
         display: 'flex',
         flex: '999 1 auto',
         gridArea: 'menu',
+        alignItems: 'center',
       }}
     >
-      <SvgButton onClick={() => dispatchAction(UNDO)} disabled={!canUndo} Svg={Undo} />
-      <SvgButton onClick={() => dispatchAction(REDO)} disabled={!canRedo} Svg={Redo} />
-      <SvgButton onClick={() => openPopup(LOAD_SAMPLE)} Svg={FileText} />
-      <SvgButton onClick={() => openPopup(LOAD_EMPTY)} Svg={FileEmpty} />
+      <SvgButton onClick={() => dispatchAction(UNDO)} disabled={!canUndo} Svg={Undo} title="Geri Al" />
+      <SvgButton onClick={() => dispatchAction(REDO)} disabled={!canRedo} Svg={Redo} title="İleri Al" />
+      <div className="toolbar-divider" />
+      <SvgButton onClick={() => openPopup(LOAD_SAMPLE)} Svg={FileText} title="Örnek Proje Yükle" />
+      <SvgButton onClick={() => openPopup(LOAD_EMPTY)} Svg={FileEmpty} title="Boş Proje Yükle" />
+      <div className="toolbar-divider" />
       <ExportButton />
       <ImportButton />
       {online && firebaseEnabled ? (
@@ -67,7 +70,7 @@ export default function Menu() {
           <SignButton />
         )
       ) : (
-        <SvgButton disabled={true} onClick={() => null} Svg={SvgWifiOff} />
+        <SvgButton disabled={true} onClick={() => null} Svg={SvgWifiOff} title="Çevrimdışı" />
       )}
       <SignOut />
       <Help />

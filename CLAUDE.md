@@ -121,10 +121,16 @@ Store {
 |-------|-----------|
 | `helpers/cycleScan.ts` | TON timer double-execution bug fix (`executedTimers` Set) |
 | `helpers/cycleScan.ts` | Timer ikinci çağrısında `RLO && Q` döner (RLO gating fix) |
-| `components/actions/SimulateButton.tsx` | `useEffect` dependency array eksikliği düzeltildi (`[simulation]`) |
+| `components/actions/SimulateButton.tsx` | `useEffect` dependency fix; hardcoded bg → CSS var; pulse animasyonu |
+| `components/actions/ActionButton.tsx` | Hardcoded `rgba(255,255,255,0.7)` → CSS var; MUI Tooltip; hover/cursor |
+| `components/SvgButton.tsx` | `--color-button-bg`; MUI Tooltip; hover; `--radius-md` |
+| `components/actions/Actions.tsx` | Tooltip label'lar + toolbar divider gruplandırması |
+| `components/menu/Menu.tsx` | Tooltip label'lar + toolbar divider gruplandırması; Export/Import butonları eklendi |
+| `components/diagram/PowerRail.tsx` | `animated` prop → `energized` CSS sınıfı (glow animasyonu) |
+| `components/diagram/Rung.tsx` | PowerRail'e `animated` prop iletimi |
+| `src/index.css` | Design tokens (`--radius-*`, `--shadow-*`, `--transition-*`); animasyon keyframe'leri |
 | `components/menu/ExportButton.tsx` | **Yeni** — JSON export |
 | `components/menu/ImportButton.tsx` | **Yeni** — JSON import |
-| `components/menu/Menu.tsx` | Export/Import butonları eklendi |
 | `components/Footer.tsx` | Patreon/About/Contact kaldırıldı, attribution linkleri eklendi |
 | `package.json` | `homepage` → `/plc-sim` (subpath deploy) |
 | `.github/workflows/deploy.yml` | **Yeni** — otomatik deploy workflow |

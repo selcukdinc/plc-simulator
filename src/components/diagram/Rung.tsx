@@ -117,7 +117,7 @@ export default function Rung({ index, mobileUI, uuid }: Props) {
       onClick={(e) => handleOnCLick(e)}
       ref={combinedRef}
     >
-      <PowerRail elementsLength={elements.length} fillColor={fillLeft} position={'left'} rungId={uuid} />
+      <PowerRail animated={simulation} elementsLength={elements.length} fillColor={fillLeft} position={'left'} rungId={uuid} />
       <Box
         sx={{
           display: 'flex',
@@ -142,7 +142,7 @@ export default function Rung({ index, mobileUI, uuid }: Props) {
           );
         })}
       </Box>
-      <PowerRail elementsLength={elements.length} fillColor={fillRight} position={'right'} rungId={uuid} />
+      <PowerRail animated={simulation && out} elementsLength={elements.length} fillColor={fillRight} position={'right'} rungId={uuid} />
       {displayRungHelp && <RungHelp />}
     </Box>
   );

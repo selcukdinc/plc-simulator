@@ -23,12 +23,17 @@ const Square = styled.div`
 `;
 const SvgContainer = styled.div`
   align-items: center;
-  background: #f7effa;
-  border-radius: 0.5rem;
+  background: var(--color-button-bg);
+  border-radius: var(--radius-md);
+  cursor: pointer;
   position: absolute;
   display: flex;
   height: 100%;
+  transition: filter var(--transition-fast);
   width: 100%;
+  &:hover {
+    filter: brightness(1.1);
+  }
 `;
 
 const SimulateButton: React.FC = () => {
@@ -76,8 +81,8 @@ const SimulateButton: React.FC = () => {
 
   return (
     <Fragment>
-      <Square onClick={() => handleClick()}>
-        <SvgContainer>
+      <Square onClick={() => handleClick()} title={simulation ? 'Simülasyonu Durdur' : 'Simülasyonu Başlat'}>
+        <SvgContainer className={simulation ? 'sim-running-btn' : ''}>
           {simulation ? (
             <SimulationStop
               fill="#FD3535"

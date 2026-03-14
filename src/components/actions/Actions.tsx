@@ -48,29 +48,36 @@ export default function Actions() {
         display: 'flex',
         flex: '1 1 auto',
         gridArea: 'actions',
+        alignItems: 'center',
       }}
     >
       <ActionButton
         enabled={objectUuid !== ''}
         onClick={() => handleClick(DELETE_OBJECT)}
         Svg={Delete}
+        title="Sil (Delete)"
       />
-      <ActionButton enabled={canMoveUp} onClick={() => handleClick(MOVE_OBJECT_UP)} Svg={ArrowUp} />
+      <div className="toolbar-divider" />
+      <ActionButton enabled={canMoveUp} onClick={() => handleClick(MOVE_OBJECT_UP)} Svg={ArrowUp} title="Yukarı Taşı" />
       <ActionButton
         enabled={canMoveDown}
         onClick={() => handleClick(MOVE_OBJECT_DOWN)}
         Svg={ArrowDown}
+        title="Aşağı Taşı"
       />
       <ActionButton
         enabled={canMoveLeft}
         onClick={() => handleClick(MOVE_OBJECT_LEFT)}
         Svg={ArrowLeft}
+        title="Sola Taşı"
       />
       <ActionButton
         enabled={canMoveRight}
         onClick={() => handleClick(MOVE_OBJECT_RIGHT)}
         Svg={ArrowRight}
+        title="Sağa Taşı"
       />
+      <div className="toolbar-divider" />
       <EditElementButton />
       <SimulateButton />
     </Box>

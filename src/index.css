@@ -1,5 +1,13 @@
 /* ===== Theme Color Variables ===== */
 :root {
+  /* Design tokens */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.10), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.06);
+  --transition-fast: 120ms ease;
+  --transition-base: 200ms ease;
   --color-element: #3D3D3D;
   --color-element-not-cfg: #FF0000;
   --color-out-on: #13A465;
@@ -82,6 +90,34 @@ input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+/* ===== Simulation animations ===== */
+@keyframes sim-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(4, 201, 50, 0.5); }
+  50% { box-shadow: 0 0 0 6px rgba(4, 201, 50, 0); }
+}
+@keyframes energized-flow {
+  0% { opacity: 0.85; }
+  50% { opacity: 1; }
+  100% { opacity: 0.85; }
+}
+.sim-running-btn {
+  animation: sim-pulse 1.4s ease-in-out infinite;
+  border-radius: var(--radius-md);
+}
+.energized {
+  animation: energized-flow 0.8s ease-in-out infinite;
+}
+
+/* ===== Toolbar divider ===== */
+.toolbar-divider {
+  width: 1px;
+  margin: 0.35rem 0.15rem;
+  background: currentColor;
+  opacity: 0.15;
+  flex-shrink: 0;
+  align-self: stretch;
 }
 
 .video-responsive {

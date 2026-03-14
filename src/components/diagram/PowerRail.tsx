@@ -6,13 +6,14 @@ import { BLOCK } from '../../consts/itemTypes';
 import { DROP_HIGHLIGHT } from '../../consts/colors';
 
 interface Props {
+  animated?: boolean;
   elementsLength: number;
   fillColor: string;
   position: 'left' | 'right';
   rungId: string;
 }
 
-export default function PowerRail({ elementsLength, fillColor, position, rungId }: Props) {
+export default function PowerRail({ animated, elementsLength, fillColor, position, rungId }: Props) {
   const [{ isOver }, drop] = useDrop(
     () => ({
       accept: [BLOCK],
@@ -31,6 +32,7 @@ export default function PowerRail({ elementsLength, fillColor, position, rungId 
 
   return (
     <Box
+      className={animated ? 'energized' : undefined}
       sx={{
         bgcolor: isOver ? DROP_HIGHLIGHT : fillColor,
         flexShrink: 0,

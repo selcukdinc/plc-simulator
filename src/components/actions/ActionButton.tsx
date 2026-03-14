@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Tooltip } from "@mui/material";
 
 const Square = styled.div`
   margin: 0.25rem;
@@ -12,12 +13,17 @@ const Square = styled.div`
   }
 `;
 const SvgContainer = styled.div`
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 10%;
+  background: var(--color-button-bg);
+  border-radius: var(--radius-md);
+  cursor: pointer;
   display: flex;
   position: absolute;
   height: 100%;
+  transition: filter var(--transition-fast);
   width: 100%;
+  &:hover {
+    filter: brightness(1.1);
+  }
 `;
 
 interface Props {
@@ -25,26 +31,29 @@ interface Props {
   enabled: boolean;
   onClick: () => void;
   Svg: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+  title?: string;
 }
 
-const SvgButton: React.FC<Props> = (props: Props) => {
-  const { color, enabled, onClick, Svg } = props;
+const ActionButton: React.FC<Props> = (props: Props) => {
+  const { color, enabled, onClick, Svg, title } = props;
 
   return (
-    <Square onClick={enabled ? onClick : undefined}>
-      <SvgContainer>
-        <Svg
-          style={{
-            fill: color,
-            height: "80%",
-            margin: "auto",
-            opacity: enabled ? "0.8" : "0.2",
-            width: "80%",
-          }}
-        />
-      </SvgContainer>
-    </Square>
+    <Tooltip title={title ?? ''} placement="bottom" arrow disableHoverListener={!title}>
+      <Square onClick={enabled ? onClick : undefined}>
+        <SvgContainer>
+          <Svg
+            style={{
+              fill: color,
+              height: "80%",
+              margin: "auto",
+              opacity: enabled ? "0.8" : "0.2",
+              width: "80%",
+            }}
+          />
+        </SvgContainer>
+      </Square>
+    </Tooltip>
   );
 };
 
-export default SvgButton;
+export default ActionButton;
