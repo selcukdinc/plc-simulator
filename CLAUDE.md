@@ -166,6 +166,10 @@ Store {
 | `components/toolbox/ToolboxBlock.tsx` | Toolbox öğe boyutu 4rem → 3.2rem |
 | `components/toolbox/ToolboxBranch.tsx` | Toolbox öğe boyutu 4rem → 3.2rem |
 | `components/toolbox/ToolboxRung.tsx` | Toolbox öğe boyutu 4rem → 3.2rem |
+| `components/menu/Help.tsx` | Dış URL → sayfa içi MUI Dialog; her buton için ikon chip + açıklama; credits bölümü (CodingPLC + Selçuk DİNÇ) |
+| `components/menu/Menu.tsx` | Çevrimdışı wifi-off butonu kaldırıldı; kullanılmayan import'lar temizlendi |
+| `components/menu/ExportButton.tsx` | `title` tooltip eklendi ("Dışa Aktar (JSON)") |
+| `components/menu/ImportButton.tsx` | `title` tooltip eklendi ("İçe Aktar (JSON)") |
 
 ## Branch Stratejisi
 - `main` → upstream ile senkron, dokunulmaz

@@ -18,7 +18,7 @@ const ExportButton: React.FC = () => {
     URL.revokeObjectURL(url);
   };
 
-  return <SvgButton onClick={handleExport} Svg={SvgFileDownload} />;
+  return <SvgButton onClick={handleExport} Svg={SvgFileDownload} title="Dışa Aktar (JSON)" />;
 };
 
 export default ExportButton;

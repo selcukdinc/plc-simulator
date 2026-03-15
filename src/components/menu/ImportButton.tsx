@@ -35,7 +35,7 @@ const ImportButton: React.FC = () => {
   return (
     <>
       <input ref={inputRef} type="file" accept=".json" style={{ display: 'none' }} onChange={handleFileChange} />
-      <SvgButton onClick={() => inputRef.current?.click()} Svg={SvgFileUpload} />
+      <SvgButton onClick={() => inputRef.current?.click()} Svg={SvgFileUpload} title="İçe Aktar (JSON)" />
     </>
   );
 };

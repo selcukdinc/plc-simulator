@@ -6,14 +6,11 @@ import { Store } from '../../interface';
 import { UNDO, REDO, LOAD_EMPTY, LOAD_SAMPLE } from '../../store/types';
 import { BG_MENU } from '../../consts/colors';
 import { auth, firebaseEnabled, logEvent } from '../../helpers/firebase';
-import { useColorMode } from '../../App';
-import { Brightness4, Brightness7 } from '@mui/icons-material';
 import useOnline from './useOnline';
 import { ReactComponent as FileText } from '../../svg/fileText.svg';
 import { ReactComponent as FileEmpty } from '../../svg/fileEmpty.svg';
 import { ReactComponent as Redo } from '../../svg/redo.svg';
 import { ReactComponent as Undo } from '../../svg/undo.svg';
-import { ReactComponent as SvgWifiOff } from '../../svg/wifi-off.svg';
 import SvgButton from '../SvgButton';
 import ExportButton from './ExportButton';
 import ImportButton from './ImportButton';
@@ -32,7 +29,6 @@ export default function Menu() {
   const [user] = useAuthState(auth);
   const online = useOnline();
   const dispatch = useDispatch();
-  const { mode, toggleColorMode } = useColorMode();
 
   const dispatchAction = (actionType: string) => {
     logEvent('load_diagram', { action: actionType });
@@ -63,14 +59,12 @@ export default function Menu() {
       <div className="toolbar-divider" />
       <ExportButton />
       <ImportButton />
-      {online && firebaseEnabled ? (
+      {online && firebaseEnabled && (
         user ? (
           <ShareButton user={user} />
         ) : (
           <SignButton />
         )
-      ) : (
-        <SvgButton disabled={true} onClick={() => null} Svg={SvgWifiOff} title="Çevrimdışı" />
       )}
       <SignOut />
       <Help />
