@@ -36,3 +36,5 @@ export const OPEN_ALERT_SNACKBAR: string = "OPEN_ALERT_SNACKBAR";
 export const CLOSE_ALERT_SNACKBAR: string = "CLOSE_ALERT_SNACKBAR";
 
 export const OPEN_ELEM_PROPERTIES: string = "OPEN_ELEM_PROPERTIES";
+
+export const SET_RUNG_COMMENT: string = "SET_RUNG_COMMENT";

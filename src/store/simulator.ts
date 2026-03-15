@@ -221,6 +221,13 @@ export default function (state = INITIAL_DRAFT, action: { type: string; payload:
           draft.temp.openElementProps = action.payload;
           return;
         }
+        case TYPES.SET_RUNG_COMMENT: {
+          const { uuid, comment } = action.payload;
+          if (draft.rungs[uuid]) {
+            draft.rungs[uuid].comment = comment;
+          }
+          return;
+        }
         case TYPES.SET_TYPE: {
           const { type } = action.payload;
           draft.elements[draft.temp.selectedUuid].type = type;
@@ -260,6 +267,12 @@ export default function (state = INITIAL_DRAFT, action: { type: string; payload:
           });
         case TYPES.IMPORT_PROJECT: {
           const diagram = action.payload as Diagram;
+          // Backward compat: eski JSON'larda comment alanı yoksa boş string ata
+          Object.keys(diagram.rungs).forEach((rungId) => {
+            if (diagram.rungs[rungId].comment === undefined) {
+              diagram.rungs[rungId].comment = '';
+            }
+          });
           changes = [];
           currentVersion = -1;
           return {
