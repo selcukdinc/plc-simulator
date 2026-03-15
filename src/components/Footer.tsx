@@ -74,6 +74,15 @@ const Separator = styled.span`
   opacity: 0.5;
 `;
 
+const CenterLinks = styled(Attribution)`
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  @media (max-width: 1000px) {
+    display: none;
+  }
+`;
+
 type Props = {
   mobileUI: boolean;
 };
@@ -108,15 +117,22 @@ export default function Footer({ mobileUI }: Props) {
         )}
       </StatusGroup>
       {!mobileUI && (
-        <Attribution>
-          <a href="https://www.codingplc.com/" target="_blank" rel="noopener noreferrer">© CodingPLC</a>
-          <Separator>·</Separator>
-          <a href="https://github.com/selcukdinc/plc-simulator" target="_blank" rel="noopener noreferrer">Fork by selcukdinc</a>
-          <Separator>·</Separator>
-          <a href="https://devloop.com.tr" target="_blank" rel="noopener noreferrer">devloop.com.tr</a>
-          <Separator>·</Separator>
-          <span>Version 1.0.2</span>
-        </Attribution>
+        <>
+          <CenterLinks>
+            <a href="https://www.codingplc.com/" target="_blank" rel="noopener noreferrer">© CodingPLC</a>
+            <Separator>·</Separator>
+            <a href="https://github.com/codingplc/plc-simulator" target="_blank" rel="noopener noreferrer">Original Project</a>
+            <Separator>·</Separator>
+            <a href="https://app.plcsimulator.online" target="_blank" rel="noopener noreferrer">Original Site</a>
+          </CenterLinks>
+          <Attribution>
+            <a href="https://github.com/selcukdinc/plc-simulator" target="_blank" rel="noopener noreferrer">Fork by selcukdinc</a>
+            <Separator>·</Separator>
+            <a href="https://devloop.com.tr" target="_blank" rel="noopener noreferrer">devloop.com.tr</a>
+            <Separator>·</Separator>
+            <span>Version 1.0.2</span>
+          </Attribution>
+        </>
       )}
     </Bar>
   );
