@@ -179,3 +179,10 @@ Store {
 ## Lisans
 GPL v3 — kaynak kodu açık kalmak zorunda. Ticari servis/destek sunulabilir,
 kaynak kapatılamaz. `LICENSE` dosyasına dokunulmamalı.
+
+## Active Technologies
+- TypeScript strict mode (React 18) — mevcu + React 18, Redux Toolkit + Immer, Styled Components, MUI, (001-3panel-industrial-sim)
+- redux-persist + localforage (IndexedDB); JSON export/import (mevcut format genişletilir) (001-3panel-industrial-sim)
+
+## Recent Changes
+- 001-3panel-industrial-sim: Added TypeScript strict mode (React 18) — mevcu + React 18, Redux Toolkit + Immer, Styled Components, MUI,
