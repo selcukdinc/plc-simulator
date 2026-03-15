@@ -12,9 +12,10 @@ import { nanoid } from 'nanoid';
 interface Props {
   block: ElementsAll;
   Svg: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+  label?: string;
 }
 
-export default function ToolboxBlock({ block, Svg }: Props) {
+export default function ToolboxBlock({ block, Svg, label }: Props) {
   const dispatch = useDispatch();
 
   const [, drag, preview] = useDrag(
@@ -46,19 +47,19 @@ export default function ToolboxBlock({ block, Svg }: Props) {
   return (
     <Box
       sx={{
-        margin: '0.25rem',
+        margin: '0.15rem',
         position: 'relative',
         width: '4rem',
         '&::after': {
           content: '""',
           display: 'block',
-          paddingBottom: '100%',
+          paddingBottom: label ? '110%' : '100%',
         },
       }}
       ref={drag}
       onClick={() => dispatch({ type: ADD_ELEMENT, payload: { block, blockId: nanoid() } })}
     >
-      <ToolboxIcon Svg={Svg} />
+      <ToolboxIcon Svg={Svg} label={label} />
     </Box>
   );
 }

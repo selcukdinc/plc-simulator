@@ -22,17 +22,19 @@ export default function Toolbox() {
         display: 'flex',
         flex: '1 1 auto',
         gridArea: 'toolbox',
+        alignItems: 'center',
+        padding: '0 0.1rem',
       }}
     >
-      <ToolboxBlock block={contact} Svg={Contact} />
-      <ToolboxBlock block={coil} Svg={Coil} />
-      <ToolboxBlock block={timer} Svg={Timer} />
-      <ToolboxBlock block={counter} Svg={Counter} />
-      <ToolboxBlock block={math} Svg={Math} />
-      <ToolboxBlock block={compare} Svg={Compare} />
-      <ToolboxBlock block={move} Svg={Move} />
-      <ToolboxBranch Svg={Branch} />
-      <ToolboxRung Svg={Rung} />
+      <ToolboxBlock block={contact} Svg={Contact} label="NO Contact" />
+      <ToolboxBlock block={coil} Svg={Coil} label="Coil" />
+      <ToolboxBlock block={timer} Svg={Timer} label="Timer (TON)" />
+      <ToolboxBlock block={counter} Svg={Counter} label="Counter (CTU)" />
+      <ToolboxBlock block={math} Svg={Math} label="Math" />
+      <ToolboxBlock block={compare} Svg={Compare} label="Comparator" />
+      <ToolboxBlock block={move} Svg={Move} label="Move" />
+      <ToolboxBranch Svg={Branch} label="Branch" />
+      <ToolboxRung Svg={Rung} label="Add Rung" />
     </Box>
   );
 }

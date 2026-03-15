@@ -1,5 +1,6 @@
 export const BORDER_SIZE = "1px";
-export const ROW_HEIGHT = "1.4rem";
+export const ROW_HEIGHT = "1.6rem";
 export const DELETE_COL_WIDTH = ROW_HEIGHT;
-export const TYPE_COL_WIDTH = "4rem";
-export const VALUE_COL_WIDTH = "6rem";
+export const TYPE_COL_WIDTH = "4.5rem";
+export const ADDRESS_COL_WIDTH = "5rem";
+export const VALUE_COL_WIDTH = "5.5rem";

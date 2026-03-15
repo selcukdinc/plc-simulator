@@ -3,7 +3,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import { SUB_VAR_SELECTED, VAR_TABLE_BORDER } from '../../consts/colors';
-import { BORDER_SIZE, DELETE_COL_WIDTH, TYPE_COL_WIDTH } from '../../consts/variableTableStyles';
+import { ADDRESS_COL_WIDTH, BORDER_SIZE, DELETE_COL_WIDTH, TYPE_COL_WIDTH } from '../../consts/variableTableStyles';
 import { Store } from '../../interface';
 import { DELETE_VARIABLE } from '../../store/types';
 
@@ -28,6 +28,11 @@ const Type = styled.td`
   box-sizing: border-box;
   padding-left: 0.2rem;
   flex: 0 0 ${TYPE_COL_WIDTH};
+`;
+const AddressPlaceholder = styled.td`
+  border-right: ${BORDER_SIZE} solid ${VAR_TABLE_BORDER};
+  box-sizing: border-box;
+  flex: 0 0 ${ADDRESS_COL_WIDTH};
 `;
 
 interface Props {
@@ -58,6 +63,7 @@ const VariableTableSubVarRow: React.FC<Props> = (props: Props) => {
     >
       <Name>{name}</Name>
       <Type>{type}</Type>
+      <AddressPlaceholder />
       <VariableValue uuid={uuid} />
       <DeletePlaceholder />
     </Row>

@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { Tooltip } from "@mui/material";
 
 const Square = styled.div`
-  margin: 0.25rem;
+  margin: 0.2rem 0.15rem;
   position: relative;
-  width: 4rem;
+  width: 3.5rem;
   &::after {
     content: "";
     display: block;
@@ -19,10 +19,10 @@ const SvgContainer = styled.div`
   display: flex;
   position: absolute;
   height: 100%;
-  transition: filter var(--transition-fast);
+  transition: background var(--transition-fast);
   width: 100%;
   &:hover {
-    filter: brightness(1.1);
+    background: var(--color-button-hover);
   }
 `;
 
@@ -35,7 +35,7 @@ interface Props {
 }
 
 const SvgButton: React.FC<Props> = (props: Props) => {
-  const { color, disabled, onClick, Svg, title } = props;
+  const { disabled, onClick, Svg, title } = props;
 
   return (
     <Tooltip title={title ?? ''} placement="bottom" arrow disableHoverListener={!title}>
@@ -43,11 +43,11 @@ const SvgButton: React.FC<Props> = (props: Props) => {
         <SvgContainer>
           <Svg
             style={{
-              fill: color,
-              height: "80%",
+              filter: 'brightness(0) invert(1)',
+              height: "70%",
               margin: "auto",
-              opacity: disabled ? "0.2" : "0.8",
-              width: "80%",
+              opacity: disabled ? "0.25" : "0.85",
+              width: "70%",
             }}
           />
         </SvgContainer>

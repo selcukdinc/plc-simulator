@@ -81,6 +81,7 @@ export interface Store extends Diagram {
 }
 
 export interface Variable {
+  address?: string;
   name: string;
   parrent: string;
   subVars: { [key: string]: string };

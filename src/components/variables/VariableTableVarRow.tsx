@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { VAR_SELECTED, VAR_TABLE_BORDER } from '../../consts/colors';
 import {
+  ADDRESS_COL_WIDTH,
   BORDER_SIZE,
   DELETE_COL_WIDTH,
   ROW_HEIGHT,
@@ -33,6 +34,18 @@ const Type = styled.td`
   padding-left: 0.2rem;
   flex: 0 0 ${TYPE_COL_WIDTH};
 `;
+const Address = styled.td`
+  border-right: ${BORDER_SIZE} solid ${VAR_TABLE_BORDER};
+  box-sizing: border-box;
+  padding-left: 0.3rem;
+  flex: 0 0 ${ADDRESS_COL_WIDTH};
+  font-family: 'Cascadia', monospace;
+  font-size: 0.75rem;
+  color: #4a7a9b;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
 
 interface Props {
   selected: boolean;
@@ -46,6 +59,7 @@ const VariableTableVarRow: React.FC<Props> = (props: Props) => {
   const [showSubVars, setShowSubVars] = useState(false);
   const variableName = useSelector((state: Store) => state.variables[uuid].name);
   const type = useSelector((state: Store) => state.variables[uuid].type);
+  const address = useSelector((state: Store) => state.variables[uuid].address);
   const subVars = useSelector((state: Store) => state.variables[uuid].subVars);
   const dispatch = useDispatch();
 
@@ -64,6 +78,7 @@ const VariableTableVarRow: React.FC<Props> = (props: Props) => {
       >
         <VariableName selected={selected} uuid={uuid} />
         <Type>{type}</Type>
+        <Address>{address || '—'}</Address>
         <VariableValue
           showSubvars={() => setShowSubVars(!showSubVars)}
           showSubVars={showSubVars}

@@ -17,6 +17,7 @@ export default function Diagram(props: Props) {
 
   return (
     <Box
+      className="diagram-dot-grid"
       sx={{
         background: BG_DIAGRAM,
         boxSizing: 'border-box',

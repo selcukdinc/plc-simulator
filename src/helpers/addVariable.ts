@@ -2,7 +2,7 @@ import { Variable } from '../interface';
 import { BOOL, COUNTER, NUMBER, TIME, TIMER } from '../consts/variables';
 import { nanoid } from 'nanoid';
 
-export const addVariable = (name: string, type: string) => {
+export const addVariable = (name: string, type: string, address?: string) => {
   const createVariables = (
     name: string,
     type: string,
@@ -12,6 +12,7 @@ export const addVariable = (name: string, type: string) => {
     const uuid = nanoid();
     let newVariables: { [key: string]: Variable } = {};
     newVariables[uuid] = {
+      address: address || '',
       name,
       parrent: '',
       type,

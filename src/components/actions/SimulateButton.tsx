@@ -12,27 +12,28 @@ import { ReactComponent as SimulationStop } from '../../svg/simulationStop.svg';
 import { Alert, Snackbar } from '@mui/material';
 
 const Square = styled.div`
-  margin: 0.25rem;
+  margin: 0.2rem 0.3rem;
   position: relative;
-  width: 4rem;
+  width: 4.5rem;
   &::after {
     content: '';
     display: block;
     padding-bottom: 100%;
   }
 `;
-const SvgContainer = styled.div`
+const SvgContainer = styled.div<{ active?: boolean }>`
   align-items: center;
-  background: var(--color-button-bg);
+  background: ${(props) => props.active ? 'rgba(253,53,53,0.18)' : 'rgba(4,201,50,0.18)'};
+  border: 1.5px solid ${(props) => props.active ? 'rgba(253,53,53,0.45)' : 'rgba(4,201,50,0.45)'};
   border-radius: var(--radius-md);
   cursor: pointer;
   position: absolute;
   display: flex;
   height: 100%;
-  transition: filter var(--transition-fast);
+  transition: background var(--transition-fast), border-color var(--transition-fast);
   width: 100%;
   &:hover {
-    filter: brightness(1.1);
+    background: ${(props) => props.active ? 'rgba(253,53,53,0.28)' : 'rgba(4,201,50,0.28)'};
   }
 `;
 
@@ -81,8 +82,8 @@ const SimulateButton: React.FC = () => {
 
   return (
     <Fragment>
-      <Square onClick={() => handleClick()} title={simulation ? 'Simülasyonu Durdur' : 'Simülasyonu Başlat'}>
-        <SvgContainer className={simulation ? 'sim-running-btn' : ''}>
+      <Square onClick={() => handleClick()} title={simulation ? 'Stop Simulation' : 'Run Simulation'}>
+        <SvgContainer active={simulation} className={simulation ? 'sim-running-btn' : ''}>
           {simulation ? (
             <SimulationStop
               fill="#FD3535"

@@ -10,9 +10,10 @@ import { getEmptyImage } from 'react-dnd-html5-backend';
 
 interface Props {
   Svg: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+  label?: string;
 }
 
-export default function ToolboxRung({ Svg }: Props) {
+export default function ToolboxRung({ Svg, label }: Props) {
   const dispatch = useDispatch();
 
   const [, drag, preview] = useDrag(
@@ -43,19 +44,19 @@ export default function ToolboxRung({ Svg }: Props) {
   return (
     <Box
       sx={{
-        margin: '0.25rem',
+        margin: '0.15rem',
         position: 'relative',
         width: '4rem',
         '&::after': {
           content: '""',
           display: 'block',
-          paddingBottom: '100%',
+          paddingBottom: label ? '110%' : '100%',
         },
       }}
       ref={drag}
       onClick={() => dispatch({ type: ADD_RUNG, payload: {} })}
     >
-      <ToolboxIcon Svg={Svg} />
+      <ToolboxIcon Svg={Svg} label={label} />
     </Box>
   );
 }

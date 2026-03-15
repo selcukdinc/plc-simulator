@@ -11,9 +11,10 @@ import { nanoid } from 'nanoid';
 
 interface Props {
   Svg: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+  label?: string;
 }
 
-export default function ToolboxBranch({ Svg }: Props) {
+export default function ToolboxBranch({ Svg, label }: Props) {
   const dispatch = useDispatch();
 
   const handleOnClick = (type: string, block?: ElementsAll) => dispatch({ type, payload: { block, blockId: nanoid() } });
@@ -46,19 +47,19 @@ export default function ToolboxBranch({ Svg }: Props) {
   return (
     <Box
       sx={{
-        margin: '0.25rem',
+        margin: '0.15rem',
         position: 'relative',
         width: '4rem',
         '&::after': {
           content: '""',
           display: 'block',
-          paddingBottom: '100%',
+          paddingBottom: label ? '110%' : '100%',
         },
       }}
       ref={drag}
       onClick={() => handleOnClick(ADD_BRANCH)}
     >
-      <ToolboxIcon Svg={Svg} />
+      <ToolboxIcon Svg={Svg} label={label} />
     </Box>
   );
 }

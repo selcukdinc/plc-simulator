@@ -82,8 +82,8 @@ export default function (state = INITIAL_DRAFT, action: { type: string; payload:
           return addRung(draft, dropIndex);
         }
         case TYPES.ADD_VARIABLE: {
-          const { name, type } = action.payload;
-          draft.variables = { ...draft.variables, ...addVariable(name, type) };
+          const { name, type, address } = action.payload;
+          draft.variables = { ...draft.variables, ...addVariable(name, type, address) };
           return;
         }
         case TYPES.ASSIGN_PARAMETER: {
