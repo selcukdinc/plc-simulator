@@ -74,9 +74,11 @@ export default function Menu() {
       )}
       <SignOut />
       <Help />
+      {/*       
       <IconButton onClick={toggleColorMode} size="small" sx={{ margin: '0.25rem', color: 'rgba(255,255,255,0.7)' }} title={mode === 'dark' ? 'Light mode' : 'Dark mode'}>
         {mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
       </IconButton>
+      */}
       <Snackbar
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         open={popupOpen}
