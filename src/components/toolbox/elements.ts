@@ -1,10 +1,11 @@
-import { ADD, CTU, EQU, MOVE, OTE, TON, XIC } from '../../consts/elementTypes';
+import { ADD, CTU, EQU, GATE_AND, GATE_NOT, MOVE, OTE, TON, XIC } from '../../consts/elementTypes';
 import { BOOL, COUNTER, NUMBER, TIME, TIMER } from '../../consts/variables';
 import {
   ElementCoil,
   ElementCompare,
   ElementContact,
   ElementCounter,
+  ElementGate,
   ElementMath,
   ElementMove,
   ElementTimer,
@@ -83,4 +84,25 @@ export const timer: ElementTimer = {
   parameters: {
     inOut: [{ type: [TIMER], uuid: '' }],
   },
+};
+
+export const gate: ElementGate = {
+  configured: false,
+  out: false,
+  parameters: {
+    input: [
+      { type: [BOOL], uuid: '' },
+      { type: [BOOL], uuid: '' },
+    ],
+  },
+  type: GATE_AND,
+};
+
+export const gateNot: ElementGate = {
+  configured: true,
+  out: false,
+  parameters: {
+    input: [],
+  },
+  type: GATE_NOT,
 };

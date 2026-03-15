@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { Tooltip } from "@mui/material";
 
 const Square = styled.div`
-  margin: 0.2rem 0.15rem;
+  margin: 0.15rem 0.1rem;
   position: relative;
-  width: 3.5rem;
+  width: 2.8rem;
   &::after {
     content: "";
     display: block;

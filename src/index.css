@@ -39,6 +39,9 @@
   --color-bg-add-var: #f5f8fa;
   --color-add-btn-bg: #0e7070;
   --color-add-btn-text: #ffffff;
+  --color-var-text: #1a1a1a;
+  --color-var-text-muted: #5a6472;
+  --color-var-text-address: #4a7a9b;
 
   /* Diagram */
   --color-bg-diagram: #f6f8fa;
@@ -80,6 +83,9 @@
   --color-bg-add-var: #1a2030;
   --color-add-btn-bg: #0a5050;
   --color-add-btn-text: #d0e8e8;
+  --color-var-text: #c8d4e0;
+  --color-var-text-muted: #7a8a9a;
+  --color-var-text-address: #6a9bc0;
 
   /* Diagram */
   --color-bg-diagram: #1e1e1e;

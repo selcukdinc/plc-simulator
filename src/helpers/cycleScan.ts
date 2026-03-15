@@ -1,5 +1,5 @@
 import * as ELEMENT_TYPES from '../consts/elementTypes';
-import { ElementContact, ElementCompare, ElementCounter, ElementMath, ElementTimer, ElementCoil, Store, ElementMove } from '../interface';
+import { ElementContact, ElementCompare, ElementCounter, ElementGate, ElementMath, ElementTimer, ElementCoil, Store, ElementMove } from '../interface';
 import { CYCLE_TIME } from '../consts/consts';
 import { Variable } from '../interface';
 import { NUMBER_MAX, NUMBER_MIN } from '../consts/variables';
@@ -50,6 +50,14 @@ export const cycleScan = (draft: Store): Store => {
       case ELEMENT_TYPES.MOV:
       case ELEMENT_TYPES.MOVE:
         return setMoveOut(element, RLO, variables);
+      case ELEMENT_TYPES.GATE_NOT:
+        element.out = !RLO;
+        return element.out;
+      case ELEMENT_TYPES.GATE_AND:
+      case ELEMENT_TYPES.GATE_OR:
+      case ELEMENT_TYPES.GATE_NAND:
+      case ELEMENT_TYPES.GATE_NOR:
+        return setGateOut(element, RLO, variables);
       case ELEMENT_TYPES.EQU:
       case ELEMENT_TYPES.NEQ:
       case ELEMENT_TYPES.GRT:
@@ -284,6 +292,45 @@ const setMoveOut = (element: ElementMove, RLO: boolean, variables: { [key: strin
   if (typeof input0.value !== 'number') return false;
   if (RLO) output0.value = input0.value;
   element.out = RLO;
+  return element.out;
+};
+
+const setGateOut = (element: ElementGate, RLO: boolean, variables: { [key: string]: Variable }): boolean => {
+  const input0 = variables[element.parameters.input[0].uuid];
+  if (!input0) return false;
+  if (typeof input0.value !== 'boolean') return false;
+  const a = input0.value;
+  switch (element.type) {
+    case ELEMENT_TYPES.GATE_NOT:
+      element.out = RLO && !a;
+      break;
+    case ELEMENT_TYPES.GATE_AND: {
+      const input1 = variables[element.parameters.input[1]?.uuid];
+      if (!input1 || typeof input1.value !== 'boolean') return false;
+      element.out = RLO && (a && input1.value);
+      break;
+    }
+    case ELEMENT_TYPES.GATE_OR: {
+      const input1 = variables[element.parameters.input[1]?.uuid];
+      if (!input1 || typeof input1.value !== 'boolean') return false;
+      element.out = RLO && (a || input1.value);
+      break;
+    }
+    case ELEMENT_TYPES.GATE_NAND: {
+      const input1 = variables[element.parameters.input[1]?.uuid];
+      if (!input1 || typeof input1.value !== 'boolean') return false;
+      element.out = RLO && !(a && input1.value);
+      break;
+    }
+    case ELEMENT_TYPES.GATE_NOR: {
+      const input1 = variables[element.parameters.input[1]?.uuid];
+      if (!input1 || typeof input1.value !== 'boolean') return false;
+      element.out = RLO && !(a || input1.value);
+      break;
+    }
+    default:
+      console.warn(`No case for ${element.type}`);
+  }
   return element.out;
 };
 

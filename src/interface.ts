@@ -21,9 +21,9 @@ export interface Element {
   type: string;
 }
 export interface Elements {
-  [key: string]: ElementCoil | ElementCompare | ElementContact | ElementCounter | ElementMath | ElementMove | ElementTimer;
+  [key: string]: ElementCoil | ElementCompare | ElementContact | ElementCounter | ElementGate | ElementMath | ElementMove | ElementTimer;
 }
-export type ElementsAll = ElementCoil | ElementCompare | ElementContact | ElementCounter | ElementMath | ElementMove | ElementTimer;
+export type ElementsAll = ElementCoil | ElementCompare | ElementContact | ElementCounter | ElementGate | ElementMath | ElementMove | ElementTimer;
 export interface ElementCoil extends Element {
   type: CoilType;
 }
@@ -39,6 +39,9 @@ export interface ElementCounter extends Element {
   prevCU: boolean;
   prevCD: boolean;
   type: CounterType;
+}
+export interface ElementGate extends Element {
+  type: GateType;
 }
 export interface ElementMath extends Element {
   type: MathType;
@@ -94,6 +97,7 @@ export interface VariableOption {
   value: string;
 }
 
+export type GateType = 'NOT' | 'AND' | 'OR' | 'NAND' | 'NOR';
 export type CounterType = 'CTU' | 'CTD' | 'CTUD';
 export type CoilType = 'OTE' | 'OTL' | 'OTU' | 'OTN';
 export type ContactType = 'XIC' | 'XIO' | 'OSP' | 'OSN';

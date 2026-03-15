@@ -41,7 +41,7 @@ const Address = styled.td`
   flex: 0 0 ${ADDRESS_COL_WIDTH};
   font-family: 'Cascadia', monospace;
   font-size: 0.75rem;
-  color: #4a7a9b;
+  color: var(--color-var-text-address);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

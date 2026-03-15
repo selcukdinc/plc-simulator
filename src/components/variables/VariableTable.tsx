@@ -5,7 +5,6 @@ import styled from "styled-components";
 import { Store } from "../../interface";
 import { BG_VARIABLES, VAR_TABLE_BORDER } from "../../consts/colors";
 
-import StudioBanner from "./StudioBanner";
 import VariableTableFoot from "./VariableTableFoot";
 import VariableTableVarRow from "./VariableTableVarRow";
 import { BORDER_SIZE, DELETE_COL_WIDTH, TYPE_COL_WIDTH, VALUE_COL_WIDTH, ADDRESS_COL_WIDTH } from "../../consts/variableTableStyles";
@@ -46,7 +45,7 @@ const ColName = styled.th`
   margin-left: 0.3rem;
   font-size: 0.72rem;
   font-weight: 600;
-  color: #5a6472;
+  color: var(--color-var-text-muted);
   padding: 0.25rem 0;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -58,7 +57,7 @@ const ColType = styled.th`
   flex: 0 0 ${TYPE_COL_WIDTH};
   font-size: 0.72rem;
   font-weight: 600;
-  color: #5a6472;
+  color: var(--color-var-text-muted);
   padding: 0.25rem 0.3rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -69,7 +68,7 @@ const ColAddress = styled.th`
   flex: 0 0 ${ADDRESS_COL_WIDTH};
   font-size: 0.72rem;
   font-weight: 600;
-  color: #5a6472;
+  color: var(--color-var-text-muted);
   padding: 0.25rem 0.3rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -80,7 +79,7 @@ const ColValue = styled.th`
   flex: 0 0 ${VALUE_COL_WIDTH};
   font-size: 0.72rem;
   font-weight: 600;
-  color: #5a6472;
+  color: var(--color-var-text-muted);
   padding: 0.25rem 0.3rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -91,6 +90,7 @@ const Row = styled.tr`
 const Table = styled.table`
   border-collapse: collapse;
   box-sizing: border-box;
+  color: var(--color-var-text);
   display: table;
   font-size: 0.81rem;
   height: 100%;
@@ -151,7 +151,6 @@ const VariableTable: React.FC<Props> = ({ mobileUI }: Props) => {
         </Table>
       </Container>
       <VariableTableFoot displayVarHelp={displayVarHelp} mobileUI={mobileUI} />
-      {!mobileUI && <StudioBanner />}
     </VariableTab>
   );
 };

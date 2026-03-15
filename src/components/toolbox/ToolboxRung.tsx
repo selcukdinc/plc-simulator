@@ -44,9 +44,9 @@ export default function ToolboxRung({ Svg, label }: Props) {
   return (
     <Box
       sx={{
-        margin: '0.15rem',
+        margin: '0.1rem',
         position: 'relative',
-        width: '4rem',
+        width: '3.2rem',
         '&::after': {
           content: '""',
           display: 'block',

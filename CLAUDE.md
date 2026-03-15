@@ -93,6 +93,18 @@ Timer alt değişkenleri: `PT` (Preset), `ET` (Elapsed), `IN`, `R` (Reset), `Q`
 ### Karşılaştırma: EQU, NEQ, GRT, GEQ, LES, LEQ
 ### Diğer: MOV/MOVE
 
+### Logic Kapıları (fork'a özgü)
+| Tip | Parametre | Mantık |
+|-----|-----------|--------|
+| NOT | — | `output = !RLO` (değişken gerektirmez, gelen sinyali tersler) |
+| AND | 2 × BOOL | `output = RLO && (A && B)` |
+| OR  | 2 × BOOL | `output = RLO && (A \|\| B)` |
+| NAND| 2 × BOOL | `output = RLO && !(A && B)` |
+| NOR | 2 × BOOL | `output = RLO && !(A \|\| B)` |
+
+NOT kapısı toolbox'ta ayrı bir öğe olarak `configured: true` ile gelir (parametre yapılandırması gerekmez).
+AND/OR/NAND/NOR kapıları tek bir "Logic Gate" toolbox öğesi olarak gelir; Properties'den birbirine dönüştürülebilir.
+
 ## State Yapısı (Redux)
 ```typescript
 Store {
@@ -134,6 +146,26 @@ Store {
 | `components/Footer.tsx` | Patreon/About/Contact kaldırıldı, attribution linkleri eklendi |
 | `package.json` | `homepage` → `/plc-sim` (subpath deploy) |
 | `.github/workflows/deploy.yml` | **Yeni** — otomatik deploy workflow |
+| `consts/elementTypes.ts` | GATE_NOT/AND/OR/NAND/NOR sabitleri eklendi |
+| `interface.ts` | `GateType`, `ElementGate` tipleri eklendi |
+| `helpers/cycleScan.ts` | Logic kapı simülasyon mantığı (setGateOut, NOT doğrudan !RLO) |
+| `components/diagram/BlockGate.tsx` | **Yeni** — logic kapı görsel bileşeni |
+| `components/toolbox/elements.ts` | `gate` (AND default) ve `gateNot` toolbox öğeleri |
+| `components/toolbox/Toolbox.tsx` | NOT ve Logic Gate butonları eklendi |
+| `components/properties/PropertiesGateType.tsx` | **Yeni** — kapı tipi seçici |
+| `components/properties/Properties.tsx` | PropertiesGateType eklendi |
+| `svg/toolbox/gate.svg` | **Yeni** — AND kapısı şekli |
+| `components/variables/VariableTable.tsx` | StudioBanner (studio.rungs.dev reklamı) kaldırıldı; dark mode CSS var'ları |
+| `components/diagram/Diagram.tsx` | AdSense/AddBanner kaldırıldı |
+| `components/variables/VariableName.tsx` | Input text color → `inherit` (dark mode fix) |
+| `components/variables/VariableTableVarRow.tsx` | Address color → CSS var (dark mode fix) |
+| `index.css` | `--color-var-text`, `--color-var-text-muted`, `--color-var-text-address` token'ları |
+| `components/actions/ActionButton.tsx` | Buton boyutu 3.5rem → 2.8rem |
+| `components/actions/SimulateButton.tsx` | Buton boyutu 4.5rem → 3.6rem |
+| `components/SvgButton.tsx` | Buton boyutu 3.5rem → 2.8rem |
+| `components/toolbox/ToolboxBlock.tsx` | Toolbox öğe boyutu 4rem → 3.2rem |
+| `components/toolbox/ToolboxBranch.tsx` | Toolbox öğe boyutu 4rem → 3.2rem |
+| `components/toolbox/ToolboxRung.tsx` | Toolbox öğe boyutu 4rem → 3.2rem |
 
 ## Branch Stratejisi
 - `main` → upstream ile senkron, dokunulmaz

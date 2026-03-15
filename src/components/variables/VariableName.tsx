@@ -15,11 +15,12 @@ const Input = styled.input<{ nameUsed: boolean; editEnabled: boolean }>`
   background: none;
   border: none;
   box-sizing: border-box;
+  color: inherit;
   height: 100%;
   text-overflow: ellipsis;
   width: 100%;
   :focus {
-    background: ${(props) => (props.nameUsed && props.editEnabled ? BG_ERROR : 'white')};
+    background: ${(props) => (props.nameUsed && props.editEnabled ? BG_ERROR : 'var(--color-bg-variables)')};
     outline: none;
   }
 `;

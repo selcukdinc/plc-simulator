@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Store } from '../../interface';
 import Rung from './Rung';
-import AddBanner from './AddBanner';
 import { Box } from '@mui/material';
 import { BG_DIAGRAM } from '../../consts/colors';
 import DiagramHelp from './DiagramHelp';
@@ -37,7 +36,6 @@ export default function Diagram(props: Props) {
         ))}
       </Box>
       {displayDiagramHelp && <DiagramHelp />}
-      <AddBanner />
     </Box>
   );
 }

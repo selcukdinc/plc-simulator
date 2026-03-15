@@ -1,10 +1,11 @@
 import { BG_TOOLBOX } from '../../consts/colors';
-import { coil, compare, contact, counter, math, move, timer } from './elements';
+import { coil, compare, contact, counter, gate, gateNot, math, move, timer } from './elements';
 import { ReactComponent as Branch } from '../../svg/toolbox/branch.svg';
 import { ReactComponent as Coil } from '../../svg/toolbox/coil.svg';
 import { ReactComponent as Contact } from '../../svg/toolbox/contact.svg';
 import { ReactComponent as Counter } from '../../svg/toolbox/counter.svg';
 import { ReactComponent as Compare } from '../../svg/toolbox/compare.svg';
+import { ReactComponent as GateSvg } from '../../svg/toolbox/gate.svg';
 import { ReactComponent as Math } from '../../svg/toolbox/math.svg';
 import { ReactComponent as Move } from '../../svg/toolbox/move.svg';
 import { ReactComponent as Rung } from '../../svg/toolbox/rung.svg';
@@ -32,6 +33,8 @@ export default function Toolbox() {
       <ToolboxBlock block={counter} Svg={Counter} label="Counter (CTU)" />
       <ToolboxBlock block={math} Svg={Math} label="Math" />
       <ToolboxBlock block={compare} Svg={Compare} label="Comparator" />
+      <ToolboxBlock block={gateNot} Svg={GateSvg} label="NOT" />
+      <ToolboxBlock block={gate} Svg={GateSvg} label="Logic Gate" />
       <ToolboxBlock block={move} Svg={Move} label="Move" />
       <ToolboxBranch Svg={Branch} label="Branch" />
       <ToolboxRung Svg={Rung} label="Add Rung" />

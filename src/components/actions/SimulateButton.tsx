@@ -12,9 +12,9 @@ import { ReactComponent as SimulationStop } from '../../svg/simulationStop.svg';
 import { Alert, Snackbar } from '@mui/material';
 
 const Square = styled.div`
-  margin: 0.2rem 0.3rem;
+  margin: 0.15rem 0.2rem;
   position: relative;
-  width: 4.5rem;
+  width: 3.6rem;
   &::after {
     content: '';
     display: block;

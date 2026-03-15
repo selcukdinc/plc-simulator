@@ -3,6 +3,7 @@ import PropertiesCoilType from './PropertiesCoilType';
 import PropertiesCompareType from './PropertiesCompareType';
 import PropertiesContactType from './PropertiesContactType';
 import PropertiesCounterType from './PropertiesCounterType';
+import PropertiesGateType from './PropertiesGateType';
 import PropertiesMathType from './PropertiesMathType';
 import PropertiesParameters from './PropertiesParameters';
 import PropertiesTimerType from './PropertiesTimerType';
@@ -33,6 +34,7 @@ export default function Properties() {
         <PropertiesCompareType />
         <PropertiesContactType />
         <PropertiesCounterType />
+        <PropertiesGateType />
         <PropertiesMathType />
         <PropertiesTimerType />
       </DialogContent>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <!-- Input wires -->
+  <line x1="0" y1="28" x2="22" y2="28" stroke="currentColor" stroke-width="5"/>
+  <line x1="0" y1="52" x2="22" y2="52" stroke="currentColor" stroke-width="5"/>
+  <!-- Gate body: AND shape (flat left, rounded right) -->
+  <path d="M22 16 L22 64 L46 64 Q70 64 70 40 Q70 16 46 16 Z" fill="none" stroke="currentColor" stroke-width="5"/>
+  <!-- Output wire -->
+  <line x1="70" y1="40" x2="80" y2="40" stroke="currentColor" stroke-width="5"/>
+</svg>

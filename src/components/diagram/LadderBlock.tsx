@@ -6,6 +6,7 @@ import Coil from './BlockCoil';
 import Compare from './BlockCompare';
 import Contact from './BlockContact';
 import Counter from './BlockCounter';
+import Gate from './BlockGate';
 import Math from './BlockMath';
 import Move from './BlockMove';
 import Timer from './BlockTimer';
@@ -65,6 +66,12 @@ export default function LadderBlock({ isOnlyElementOf1stRung, isOver, parrentSel
           case ELEMENTS.MOV:
           case ELEMENTS.MOVE:
             return <Move parameters={parameters} fill={fill} type={type} />;
+          case ELEMENTS.GATE_NOT:
+          case ELEMENTS.GATE_AND:
+          case ELEMENTS.GATE_OR:
+          case ELEMENTS.GATE_NAND:
+          case ELEMENTS.GATE_NOR:
+            return <Gate parameters={parameters} fill={fill} type={type} />;
           default:
             console.warn(`There is no block component for ${type}`);
             return null;
