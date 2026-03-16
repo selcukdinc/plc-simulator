@@ -199,6 +199,10 @@ export default function (state = INITIAL_DRAFT, action: { type: string; payload:
           draft.misc.displayTab = displayTab;
           return;
         }
+        case TYPES.SET_ACTIVE_TAB: {
+          draft.misc.activeTab = action.payload;
+          return;
+        }
         case TYPES.SET_DIAG_SAVED: {
           const { diagramSaved } = action.payload;
           draft.temp.diagramSaved = diagramSaved;
@@ -207,6 +211,13 @@ export default function (state = INITIAL_DRAFT, action: { type: string; payload:
         case TYPES.SET_SIMULATION: {
           const { value } = action.payload;
           draft.temp.simulation = value;
+          if (!value) {
+            Object.keys(draft.scene.blocks).forEach((blockId) => {
+              draft.scene.blocks[blockId].targetX = draft.scene.blocks[blockId].x;
+              draft.scene.blocks[blockId].targetY = draft.scene.blocks[blockId].y;
+            });
+            draft.temp.powerCircuitEnergized = new Set<string>();
+          }
           return;
         }
         case TYPES.OPEN_ALERT_SNACKBAR: {
@@ -249,6 +260,168 @@ export default function (state = INITIAL_DRAFT, action: { type: string; payload:
           variable.value = value;
           return;
         }
+        case TYPES.ADD_CONTROL_ELEMENT: {
+          const el = action.payload;
+          draft.controlPanel.elements[el.id] = {
+            id: el.id,
+            type: el.elementType,
+            label: el.label,
+            x: el.x,
+            y: el.y,
+            variableId: null,
+          };
+          return;
+        }
+        case TYPES.REMOVE_CONTROL_ELEMENT: {
+          delete draft.controlPanel.elements[action.payload.id];
+          return;
+        }
+        case TYPES.UPDATE_CONTROL_ELEMENT: {
+          const { id, patch } = action.payload;
+          if (draft.controlPanel.elements[id]) {
+            Object.assign(draft.controlPanel.elements[id], patch);
+          }
+          return;
+        }
+        case TYPES.CONTROL_BUTTON_PRESS: {
+          const elem = draft.controlPanel.elements[action.payload.elementId];
+          if (!elem || !elem.variableId) return;
+          if (draft.variables[elem.variableId]) {
+            draft.variables[elem.variableId].value = true;
+          }
+          return;
+        }
+        case TYPES.CONTROL_BUTTON_RELEASE: {
+          const elem = draft.controlPanel.elements[action.payload.elementId];
+          if (!elem || !elem.variableId) return;
+          if (elem.type === 'PUSH_BUTTON' && draft.variables[elem.variableId]) {
+            draft.variables[elem.variableId].value = false;
+          }
+          return;
+        }
+        case TYPES.TOGGLE_SWITCH_CLICK: {
+          const elem = draft.controlPanel.elements[action.payload.elementId];
+          if (!elem || !elem.variableId) return;
+          if (draft.variables[elem.variableId]) {
+            const current = draft.variables[elem.variableId].value;
+            draft.variables[elem.variableId].value = !current;
+          }
+          return;
+        }
+        case TYPES.ADD_POWER_ELEMENT: {
+          const { id, elementType, x, y, label } = action.payload;
+          const terminalConfigs: Record<string, Array<{ side: 'in' | 'out'; index: number }>> = {
+            POWER_SOURCE: [{ side: 'out', index: 0 }],
+            CONTACTOR: [{ side: 'in', index: 0 }, { side: 'out', index: 0 }],
+            THERMAL_RELAY: [{ side: 'in', index: 0 }, { side: 'out', index: 0 }],
+            MOTOR: [{ side: 'in', index: 0 }],
+            FUSE: [{ side: 'in', index: 0 }, { side: 'out', index: 0 }],
+            TERMINAL_BLOCK: [{ side: 'in', index: 0 }, { side: 'in', index: 1 }, { side: 'out', index: 0 }, { side: 'out', index: 1 }],
+          };
+          const tConfigs = terminalConfigs[elementType] ?? [];
+          const terminals = tConfigs.map((cfg, i) => ({
+            id: `${id}-t${i}`,
+            elementId: id,
+            side: cfg.side,
+            index: cfg.index,
+          }));
+          draft.powerCircuit.elements[id] = { id, type: elementType, label, x, y, rotation: 0, variableId: null, terminals };
+          return;
+        }
+        case TYPES.REMOVE_POWER_ELEMENT: {
+          const { id } = action.payload;
+          const elem = draft.powerCircuit.elements[id];
+          if (!elem) return;
+          const terminalIds = new Set(elem.terminals.map((t) => t.id));
+          Object.keys(draft.powerCircuit.cables).forEach((cableId) => {
+            const cable = draft.powerCircuit.cables[cableId];
+            if (terminalIds.has(cable.fromTerminalId) || terminalIds.has(cable.toTerminalId)) {
+              delete draft.powerCircuit.cables[cableId];
+            }
+          });
+          delete draft.powerCircuit.elements[id];
+          return;
+        }
+        case TYPES.MOVE_POWER_ELEMENT: {
+          const { id, x, y } = action.payload;
+          if (draft.powerCircuit.elements[id]) {
+            draft.powerCircuit.elements[id].x = x;
+            draft.powerCircuit.elements[id].y = y;
+          }
+          return;
+        }
+        case TYPES.ADD_CABLE: {
+          const { id, fromTerminalId, toTerminalId } = action.payload;
+          const alreadyUsed = Object.values(draft.powerCircuit.cables).some(
+            (c) => c.fromTerminalId === fromTerminalId || c.toTerminalId === fromTerminalId ||
+                   c.fromTerminalId === toTerminalId || c.toTerminalId === toTerminalId
+          );
+          if (!alreadyUsed) {
+            draft.powerCircuit.cables[id] = { id, fromTerminalId, toTerminalId };
+          }
+          return;
+        }
+        case TYPES.REMOVE_CABLE: {
+          delete draft.powerCircuit.cables[action.payload.id];
+          return;
+        }
+        case TYPES.SET_POWER_ELEMENT_VARIABLE: {
+          const { elementId, variableId } = action.payload;
+          if (draft.powerCircuit.elements[elementId]) {
+            draft.powerCircuit.elements[elementId].variableId = variableId;
+          }
+          return;
+        }
+        case TYPES.ADD_SCENE_BLOCK: {
+          const { id, blockType, x, y, label, speedPxPerSec } = action.payload;
+          draft.scene.blocks[id] = {
+            id, type: blockType, label, x, y, targetX: x, targetY: y,
+            speedPxPerSec: speedPxPerSec ?? 100,
+            minX: 0, maxX: 1000, minY: 0, maxY: 600,
+            axes: { forwardVariableId: null, backwardVariableId: null },
+          };
+          return;
+        }
+        case TYPES.REMOVE_SCENE_BLOCK: {
+          delete draft.scene.blocks[action.payload.id];
+          return;
+        }
+        case TYPES.UPDATE_SCENE_BLOCK: {
+          const { id, patch } = action.payload;
+          if (draft.scene.blocks[id]) {
+            Object.assign(draft.scene.blocks[id], patch);
+          }
+          return;
+        }
+        case TYPES.SET_SCENE_BLOCK_TARGET: {
+          const { id, targetX, targetY } = action.payload;
+          if (draft.scene.blocks[id]) {
+            draft.scene.blocks[id].targetX = targetX;
+            draft.scene.blocks[id].targetY = targetY;
+          }
+          return;
+        }
+        case TYPES.ADD_SENSOR_BLOCK: {
+          const { id, sensorType, x, y, label, triggerWidth, triggerHeight } = action.payload;
+          draft.scene.sensors[id] = {
+            id, type: sensorType, label, x, y,
+            triggerWidth: triggerWidth ?? 20,
+            triggerHeight: triggerHeight ?? 20,
+            variableId: null,
+          };
+          return;
+        }
+        case TYPES.REMOVE_SENSOR_BLOCK: {
+          delete draft.scene.sensors[action.payload.id];
+          return;
+        }
+        case TYPES.UPDATE_SENSOR_BLOCK: {
+          const { id, patch } = action.payload;
+          if (draft.scene.sensors[id]) {
+            Object.assign(draft.scene.sensors[id], patch);
+          }
+          return;
+        }
         case TYPES.UNDO:
           window.history.replaceState({}, document.title, "/");
           return produce(applyPatches(state, changes[currentVersion--].undo) as Store, (newDraft: Store) => {
@@ -277,8 +450,12 @@ export default function (state = INITIAL_DRAFT, action: { type: string; payload:
           currentVersion = -1;
           return {
             ...diagram,
+            controlPanel: (diagram as any).controlPanel ?? { elements: {} },
+            powerCircuit: (diagram as any).powerCircuit ?? { elements: {}, cables: {} },
+            scene: (diagram as any).scene ?? { blocks: {}, sensors: {} },
             misc: {
               displayTab: "diagram",
+              activeTab: 'LADDER' as const,
             },
             temp: {
               alertSnackbar: {
@@ -292,6 +469,7 @@ export default function (state = INITIAL_DRAFT, action: { type: string; payload:
               openElementProps: false,
               simulation: false,
               selectedUuid: "",
+              powerCircuitEnergized: new Set<string>(),
             },
           };
         }

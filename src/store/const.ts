@@ -1,4 +1,4 @@
-import { Store } from "../interface";
+import { AppTab, Store } from "../interface";
 
 export const SAMPLE_DRAFT: Store = {
   runglist: [
@@ -651,8 +651,12 @@ export const SAMPLE_DRAFT: Store = {
       subVars: {},
     },
   },
+  controlPanel: { elements: {} },
+  powerCircuit: { elements: {}, cables: {} },
+  scene: { blocks: {}, sensors: {} },
   misc: {
     displayTab: "diagram",
+    activeTab: 'LADDER' as AppTab,
   },
   temp: {
     alertSnackbar: { color: "info", open: true, text: "Sample diagram loaded." },
@@ -662,6 +666,7 @@ export const SAMPLE_DRAFT: Store = {
     openElementProps: false,
     simulation: false,
     selectedUuid: "",
+    powerCircuitEnergized: new Set<string>(),
   },
 };
 
@@ -678,8 +683,12 @@ export const INITIAL_DRAFT: Store = {
   branches: {},
   elements: {},
   variables: {},
+  controlPanel: { elements: {} },
+  powerCircuit: { elements: {}, cables: {} },
+  scene: { blocks: {}, sensors: {} },
   misc: {
     displayTab: "diagram",
+    activeTab: 'LADDER' as AppTab,
   },
   temp: {
     alertSnackbar: { color: "info", open: false, text: "Initial diagram loaded." },
@@ -689,6 +698,7 @@ export const INITIAL_DRAFT: Store = {
     openElementProps: false,
     simulation: false,
     selectedUuid: "",
+    powerCircuitEnergized: new Set<string>(),
   },
 };
 

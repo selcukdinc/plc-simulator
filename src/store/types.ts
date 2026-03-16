@@ -38,3 +38,27 @@ export const CLOSE_ALERT_SNACKBAR: string = "CLOSE_ALERT_SNACKBAR";
 export const OPEN_ELEM_PROPERTIES: string = "OPEN_ELEM_PROPERTIES";
 
 export const SET_RUNG_COMMENT: string = "SET_RUNG_COMMENT";
+
+export const SET_ACTIVE_TAB: string = "SET_ACTIVE_TAB";
+
+export const ADD_CONTROL_ELEMENT: string = "ADD_CONTROL_ELEMENT";
+export const REMOVE_CONTROL_ELEMENT: string = "REMOVE_CONTROL_ELEMENT";
+export const UPDATE_CONTROL_ELEMENT: string = "UPDATE_CONTROL_ELEMENT";
+export const CONTROL_BUTTON_PRESS: string = "CONTROL_BUTTON_PRESS";
+export const CONTROL_BUTTON_RELEASE: string = "CONTROL_BUTTON_RELEASE";
+export const TOGGLE_SWITCH_CLICK: string = "TOGGLE_SWITCH_CLICK";
+
+export const ADD_POWER_ELEMENT: string = "ADD_POWER_ELEMENT";
+export const REMOVE_POWER_ELEMENT: string = "REMOVE_POWER_ELEMENT";
+export const MOVE_POWER_ELEMENT: string = "MOVE_POWER_ELEMENT";
+export const ADD_CABLE: string = "ADD_CABLE";
+export const REMOVE_CABLE: string = "REMOVE_CABLE";
+export const SET_POWER_ELEMENT_VARIABLE: string = "SET_POWER_ELEMENT_VARIABLE";
+
+export const ADD_SCENE_BLOCK: string = "ADD_SCENE_BLOCK";
+export const REMOVE_SCENE_BLOCK: string = "REMOVE_SCENE_BLOCK";
+export const UPDATE_SCENE_BLOCK: string = "UPDATE_SCENE_BLOCK";
+export const SET_SCENE_BLOCK_TARGET: string = "SET_SCENE_BLOCK_TARGET";
+export const ADD_SENSOR_BLOCK: string = "ADD_SENSOR_BLOCK";
+export const REMOVE_SENSOR_BLOCK: string = "REMOVE_SENSOR_BLOCK";
+export const UPDATE_SENSOR_BLOCK: string = "UPDATE_SENSOR_BLOCK";

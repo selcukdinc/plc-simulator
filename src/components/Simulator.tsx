@@ -9,8 +9,12 @@ import Footer from './Footer';
 import TabSelect from './TabSelect';
 import Toolbox from './toolbox/Toolbox';
 import Menu from './menu/Menu';
+import TabBar from './menu/TabBar';
 import VariableTable from './variables/VariableTable';
 import AlertSnackbar from './AlertSnackbar';
+import ControlPanel from './controlpanel/ControlPanel';
+import PowerCircuitCanvas from './powercircuit/PowerCircuitCanvas';
+import SceneCanvas from './scene/SceneCanvas';
 import { DELETE_OBJECT } from '../store/types';
 
 const Desktop = styled.div`
@@ -51,8 +55,10 @@ const Container = styled.div`
 const Simulator: React.FC = () => {
   const [mobileUI, setMobileUI] = useState(window.innerWidth < 640);
   const displayTab = useSelector((state: Store) => state.misc.displayTab);
+  const activeTab = useSelector((state: Store) => state.misc.activeTab ?? 'LADDER');
   const displayDiagramTab = displayTab === DISPLAY_TAB.DIAGRAM;
   const displayVariablesTab = displayTab === DISPLAY_TAB.VARIABLES;
+  const isLadderTab = activeTab === 'LADDER';
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -84,9 +90,32 @@ const Simulator: React.FC = () => {
             <Menu />
             <Toolbox />
             <Actions />
+            <TabBar />
           </Header>
-          <VariableTable mobileUI={false} />
-          <Diagram mobileUI={mobileUI} />
+          {isLadderTab ? (
+            <>
+              <VariableTable mobileUI={false} />
+              <Diagram mobileUI={mobileUI} />
+            </>
+          ) : (
+            <>
+              {activeTab === 'CONTROL_PANEL' && (
+                <div style={{ gridArea: 'variables / variables / diagram / diagram', overflow: 'hidden' }}>
+                  <ControlPanel />
+                </div>
+              )}
+              {activeTab === 'POWER_CIRCUIT' && (
+                <div style={{ gridArea: 'variables / variables / diagram / diagram', overflow: 'hidden' }}>
+                  <PowerCircuitCanvas />
+                </div>
+              )}
+              {activeTab === 'SCENE' && (
+                <div style={{ gridArea: 'variables / variables / diagram / diagram', overflow: 'hidden' }}>
+                  <SceneCanvas />
+                </div>
+              )}
+            </>
+          )}
           <Footer mobileUI={mobileUI} />
         </Desktop>
       )}

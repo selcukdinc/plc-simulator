@@ -70,8 +70,91 @@ export type Rungs = {
   [key: string]: Rung;
 };
 
+// New panel types
+export type ControlElementType = 'PUSH_BUTTON' | 'TOGGLE_SWITCH' | 'PILOT_LAMP' | 'EMERGENCY_STOP';
+export type PowerElementType = 'POWER_SOURCE' | 'CONTACTOR' | 'THERMAL_RELAY' | 'MOTOR' | 'FUSE' | 'TERMINAL_BLOCK';
+export type SceneBlockType = 'CRANE_TROLLEY' | 'CRANE_HOOK' | 'CONVEYOR' | 'PNEUMATIC_CYL' | 'LIFT_TABLE' | 'SIGNAL_TOWER';
+export type SensorType = 'LIMIT_SWITCH' | 'PHOTOELECTRIC' | 'PROXIMITY';
+export type AppTab = 'LADDER' | 'CONTROL_PANEL' | 'POWER_CIRCUIT' | 'SCENE';
+
+export interface ControlElement {
+  id: string;
+  type: ControlElementType;
+  label: string;
+  x: number;
+  y: number;
+  variableId: string | null;
+}
+export interface ControlPanel {
+  elements: { [id: string]: ControlElement };
+}
+
+export interface Terminal {
+  id: string;
+  elementId: string;
+  side: 'in' | 'out';
+  index: number;
+}
+export interface PowerElement {
+  id: string;
+  type: PowerElementType;
+  label: string;
+  x: number;
+  y: number;
+  rotation: 0 | 90 | 180 | 270;
+  variableId: string | null;
+  terminals: Terminal[];
+}
+export interface Cable {
+  id: string;
+  fromTerminalId: string;
+  toTerminalId: string;
+}
+export interface PowerCircuit {
+  elements: { [id: string]: PowerElement };
+  cables: { [id: string]: Cable };
+}
+
+export interface SceneBlockAxes {
+  forwardVariableId: string | null;
+  backwardVariableId: string | null;
+}
+export interface SceneBlock {
+  id: string;
+  type: SceneBlockType;
+  label: string;
+  x: number;
+  y: number;
+  targetX: number;
+  targetY: number;
+  speedPxPerSec: number;
+  minX: number;
+  maxX: number;
+  minY: number;
+  maxY: number;
+  axes: SceneBlockAxes;
+  signalVariableId?: string | null;
+}
+export interface SensorBlock {
+  id: string;
+  type: SensorType;
+  label: string;
+  x: number;
+  y: number;
+  triggerWidth: number;
+  triggerHeight: number;
+  variableId: string | null;
+}
+export interface Scene {
+  blocks: { [id: string]: SceneBlock };
+  sensors: { [id: string]: SensorBlock };
+}
+
 export interface Store extends Diagram {
-  misc: { displayTab: string };
+  controlPanel: ControlPanel;
+  powerCircuit: PowerCircuit;
+  scene: Scene;
+  misc: { displayTab: string; activeTab: AppTab };
   temp: {
     alertSnackbar: { color: AlertColor; open: boolean; text: string };
     canUndo: boolean;
@@ -80,6 +163,7 @@ export interface Store extends Diagram {
     openElementProps: boolean;
     simulation: boolean;
     selectedUuid: string;
+    powerCircuitEnergized: Set<string>;
   };
 }
 

@@ -3,6 +3,8 @@ import { ElementContact, ElementCompare, ElementCounter, ElementGate, ElementMat
 import { CYCLE_TIME } from '../consts/consts';
 import { Variable } from '../interface';
 import { NUMBER_MAX, NUMBER_MIN } from '../consts/variables';
+import { evaluatePowerCircuitTopology } from './evaluatePowerCircuitTopology';
+import { evaluateSceneBlocks } from './evaluateSceneBlocks';
 
 export const cycleScan = (draft: Store): Store => {
   const { branches, elements, rungs } = draft;
@@ -87,6 +89,28 @@ export const cycleScan = (draft: Store): Store => {
   for (const rung of draft.runglist) {
     rungOut(rung, draft.temp.simulation);
   }
+
+  // Power circuit topology
+  if (draft.powerCircuit) {
+    draft.temp.powerCircuitEnergized = evaluatePowerCircuitTopology(draft.powerCircuit, draft.variables);
+  }
+
+  // Scene block evaluation
+  if (draft.scene) {
+    const updates = evaluateSceneBlocks(draft.scene, draft.variables, CYCLE_TIME);
+    Object.keys(updates.blockTargets).forEach((id) => {
+      if (draft.scene.blocks[id]) {
+        draft.scene.blocks[id].targetX = updates.blockTargets[id].targetX;
+        draft.scene.blocks[id].targetY = updates.blockTargets[id].targetY;
+      }
+    });
+    Object.keys(updates.sensorTriggers).forEach((variableId) => {
+      if (draft.variables[variableId]) {
+        (draft.variables[variableId].value as boolean) = updates.sensorTriggers[variableId];
+      }
+    });
+  }
+
   return draft;
 };
 
