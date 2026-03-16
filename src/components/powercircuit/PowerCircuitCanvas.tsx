@@ -2,7 +2,7 @@ import React, { useCallback, useRef, useState } from 'react';
 import { useDrop } from 'react-dnd';
 import { useSelector, useDispatch } from 'react-redux';
 import { Store, PowerElementType } from '../../interface';
-import { ADD_POWER_ELEMENT, ADD_CABLE, MOVE_POWER_ELEMENT, REMOVE_POWER_ELEMENT } from '../../store/types';
+import { ADD_POWER_ELEMENT, ADD_CABLE, MOVE_POWER_ELEMENT } from '../../store/types';
 import PowerElement, { getTerminalDots } from './PowerElement';
 import PowerCable from './PowerCable';
 import PowerElementPalette from './PowerElementPalette';

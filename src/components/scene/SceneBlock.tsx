@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { Store, SceneBlock as SceneBlockType } from '../../interface';
+import { Store } from '../../interface';
 import { useAnimationFrame } from '../../hooks/useAnimationFrame';
 
 const BLOCK_W = 80;

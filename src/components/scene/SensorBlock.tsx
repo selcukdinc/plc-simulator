@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Store, SensorBlock as SensorBlockType } from '../../interface';
+import { Store } from '../../interface';
 
 interface Props {
   sensorId: string;
