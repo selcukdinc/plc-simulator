@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - selcuk-dev
+      - 001-3panel-industrial-sim
 
 jobs:
   deploy:
