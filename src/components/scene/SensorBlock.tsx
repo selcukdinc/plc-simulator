@@ -5,6 +5,7 @@ import { Store, SensorBlock as SensorBlockType } from '../../interface';
 interface Props {
   sensorId: string;
   onClick?: (id: string) => void;
+  onDoubleClick?: (id: string) => void;
 }
 
 function LimitSwitchIcon({ triggered }: { triggered: boolean }) {
@@ -42,7 +43,7 @@ function ProximityIcon({ triggered }: { triggered: boolean }) {
   );
 }
 
-const SensorBlock: React.FC<Props> = ({ sensorId, onClick }) => {
+const SensorBlock: React.FC<Props> = ({ sensorId, onClick, onDoubleClick }) => {
   const sensor = useSelector((state: Store) => state.scene.sensors[sensorId]);
   const triggered = useSelector((state: Store) =>
     sensor?.variableId ? Boolean(state.variables[sensor.variableId]?.value) : false
@@ -62,6 +63,7 @@ const SensorBlock: React.FC<Props> = ({ sensorId, onClick }) => {
       transform={`translate(${sensor.x},${sensor.y})`}
       style={{ cursor: 'pointer' }}
       onClick={() => onClick?.(sensorId)}
+      onDoubleClick={() => onDoubleClick?.(sensorId)}
     >
       {/* Trigger zone bounding box */}
       <rect

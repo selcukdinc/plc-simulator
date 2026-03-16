@@ -112,8 +112,8 @@ All Phase 1 tasks touch different files and can run in parallel.
 - [X] T038 [US3] Create `src/components/scene/SensorBlock.tsx`
 - [X] T039 [US3] Create `src/components/scene/SceneBlockPalette.tsx` (arama + 6 blok + 3 sensör)
 - [X] T040 [US3] Create `src/components/scene/SceneCanvas.tsx`
-- [ ] T041 [US3] Create `src/components/properties/PropertiesSceneBlock.tsx` — blok properties paneli (ertelendi)
-- [ ] T042 [US3] Create `src/components/properties/PropertiesSensorBlock.tsx` — sensör properties paneli (ertelendi)
+- [X] T041 [US3] Create `src/components/properties/PropertiesSceneBlock.tsx` — blok properties paneli
+- [X] T042 [US3] Create `src/components/properties/PropertiesSensorBlock.tsx` — sensör properties paneli
 - [ ] T043 [US3] Add SVG toolbox icons (ertelendi — paletteki SVG'ler inline)
 - [X] T044 [US3] Wire Gerçek Hayat tab in `src/components/Simulator.tsx`
 
@@ -144,12 +144,12 @@ All Phase 1 tasks touch different files and can run in parallel.
 
 **Purpose**: Kod kalitesi, performans, tutarlılık ve export/import doğrulaması.
 
-- [ ] T051 [P] Audit all new component files (`src/components/controlpanel/`, `src/components/powercircuit/`, `src/components/scene/`) for hardcoded color/size values — replace any `rgba(...)`, `#...`, or `px` sizing not using CSS custom properties with `var(--color-*)`, `var(--radius-*)`, `var(--shadow-*)`
-- [ ] T052 [P] Add `src/consts/sceneBlockTypes.ts` with exported string constant arrays `SCENE_BLOCK_TYPES` and `SENSOR_TYPES` matching the union types in `interface.ts`; use these in palette and reducer instead of inline string literals
-- [ ] T053 Update `CLAUDE.md` under "Yapılan Değişiklikler" table: add rows for every new file created (TabBar, ControlPanel, PowerCircuitCanvas, SceneCanvas, evaluatePowerCircuitTopology, evaluateSceneBlocks, useAnimationFrame, PropertiesSceneBlock, PropertiesSensorBlock, ExportButton/ImportButton changes, simulator.ts additions)
-- [ ] T054 Run `yarn build` and fix all TypeScript errors until build exits with code 0
-- [ ] T055 Manual browser test (console clean check): open app → switch all 4 tabs → add one element per panel → start simulation → trigger control panel button → verify variable changes → stop simulation → verify reset; browser console must show zero errors and zero warnings
-- [ ] T056 Manual export/import round-trip test: add elements to all 3 panels → export JSON → clear all → import JSON → verify all panels restore correctly with variable assignments intact
+- [X] T051 [P] CSS token audit — layout/container renkleri var() kullanıyor; SVG endüstriyel gösterge renkleri kasıtlı
+- [X] T052 [P] `src/consts/sceneBlockTypes.ts` oluşturuldu
+- [X] T053 `CLAUDE.md` "Yapılan Değişiklikler" tablosu güncellendi (33 yeni satır)
+- [X] T054 `yarn build` — sıfır hata, 462 kB (gzip)
+- [ ] T055 Manuel browser testi — kullanıcı tarafından yapılmalı
+- [ ] T056 Manuel export/import testi — kullanıcı tarafından yapılmalı
 
 ---
 

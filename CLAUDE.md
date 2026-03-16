@@ -170,6 +170,37 @@ Store {
 | `components/menu/Menu.tsx` | Çevrimdışı wifi-off butonu kaldırıldı; kullanılmayan import'lar temizlendi |
 | `components/menu/ExportButton.tsx` | `title` tooltip eklendi ("Dışa Aktar (JSON)") |
 | `components/menu/ImportButton.tsx` | `title` tooltip eklendi ("İçe Aktar (JSON)") |
+| `interface.ts` | ControlElement, ControlPanel, PowerElement, Terminal, Cable, PowerCircuit, SceneBlock, SensorBlock, Scene, AppTab tipleri eklendi |
+| `store/types.ts` | 20 yeni action type sabiti (SET_ACTIVE_TAB, ADD_CONTROL_ELEMENT, ADD_POWER_ELEMENT, ADD_CABLE, ADD_SCENE_BLOCK vb.) |
+| `store/const.ts` | controlPanel, powerCircuit, scene slice başlangıç state'leri |
+| `store/simulator.ts` | 19 yeni reducer case; STOP_SIMULATION genişletmesi; IMPORT_PROJECT merge mantığı |
+| `hooks/useAnimationFrame.ts` | **Yeni** — rAF custom hook (60fps, scan'dan bağımsız) |
+| `components/menu/TabBar.tsx` | **Yeni** — 4 sekme: Ladder / Kumanda / Güç Devresi / Gerçek Hayat |
+| `components/menu/ExportButton.tsx` | controlPanel, powerCircuit, scene slice'ları export'a eklendi |
+| `components/Simulator.tsx` | TabBar entegre; 4 sekme koşullu render |
+| `components/controlpanel/ControlPushButton.tsx` | **Yeni** — basmalı buton (momentary) |
+| `components/controlpanel/ControlToggleSwitch.tsx` | **Yeni** — toggle anahtar |
+| `components/controlpanel/ControlPilotLamp.tsx` | **Yeni** — sinyal lambası (read-only) |
+| `components/controlpanel/ControlEmergencyStop.tsx` | **Yeni** — acil stop butonu |
+| `components/controlpanel/ControlElement.tsx` | **Yeni** — generic wrapper + ⚠ uyarılar + çift tıkla dialog |
+| `components/controlpanel/ControlElementPalette.tsx` | **Yeni** — sol palet (react-dnd) |
+| `components/controlpanel/ControlElementVariableDialog.tsx` | **Yeni** — değişken atama dialogu |
+| `components/controlpanel/ControlPanel.tsx` | **Yeni** — drop target kanvas |
+| `components/powercircuit/PowerElement.tsx` | **Yeni** — 6 eleman tipi SVG (POWER_SOURCE, CONTACTOR, MOTOR, FUSE, THERMAL_RELAY, TERMINAL_BLOCK) |
+| `components/powercircuit/PowerCable.tsx` | **Yeni** — SVG kablo (elbow routing, energized rengi) |
+| `components/powercircuit/PowerCircuitCanvas.tsx` | **Yeni** — SVG kanvas + kablo çizim etkileşimi + DnD drop target |
+| `components/powercircuit/PowerElementPalette.tsx` | **Yeni** — sol palet (react-dnd) |
+| `components/powercircuit/PowerElementVariableDialog.tsx` | **Yeni** — kontaktör değişken dialogu |
+| `components/scene/SceneBlock.tsx` | **Yeni** — 6 blok tipi + rAF lerp animasyonu (re-render yok) |
+| `components/scene/SensorBlock.tsx` | **Yeni** — 3 sensör tipi + AABB trigger zone görseli |
+| `components/scene/SceneBlockPalette.tsx` | **Yeni** — sol palet + arama kutusu |
+| `components/scene/SceneCanvas.tsx` | **Yeni** — SVG kanvas + çift tıkla → properties dialog |
+| `components/properties/PropertiesSceneBlock.tsx` | **Yeni** — blok özellikleri (hız, sınır, değişken atama) |
+| `components/properties/PropertiesSensorBlock.tsx` | **Yeni** — sensör özellikleri (tip, trigger boyutu, değişken) |
+| `helpers/evaluatePowerCircuitTopology.ts` | **Yeni** — saf BFS fonksiyonu (güç devresi topoloji doğrulaması) |
+| `helpers/evaluateSceneBlocks.ts` | **Yeni** — sensör çarpışma + blok hareket hesabı (her scan sonunda çalışır) |
+| `helpers/cycleScan.ts` | evaluatePowerCircuitTopology + evaluateSceneBlocks çağrıları eklendi |
+| `consts/sceneBlockTypes.ts` | **Yeni** — SCENE_BLOCK_TYPES ve SENSOR_TYPES sabitleri |
 
 ## Branch Stratejisi
 - `main` → upstream ile senkron, dokunulmaz

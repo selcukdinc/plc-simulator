@@ -9,6 +9,7 @@ const BLOCK_H = 48;
 interface Props {
   blockId: string;
   onClick?: (id: string) => void;
+  onDoubleClick?: (id: string) => void;
 }
 
 function CraneTrolleyShape({ active }: { active: boolean }) {
@@ -111,7 +112,7 @@ function SignalTowerShape({ r, y, g }: { r: boolean; y: boolean; g: boolean }) {
   );
 }
 
-const SceneBlock: React.FC<Props> = ({ blockId, onClick }) => {
+const SceneBlock: React.FC<Props> = ({ blockId, onClick, onDoubleClick }) => {
   const block = useSelector((state: Store) => state.scene.blocks[blockId]);
   const variables = useSelector((state: Store) => state.variables);
   const groupRef = useRef<SVGGElement>(null);
@@ -148,6 +149,7 @@ const SceneBlock: React.FC<Props> = ({ blockId, onClick }) => {
       transform={`translate(${block.x},${block.y})`}
       style={{ cursor: 'pointer' }}
       onClick={() => onClick?.(blockId)}
+      onDoubleClick={() => onDoubleClick?.(blockId)}
     >
       <svg width={BLOCK_W} height={BLOCK_H} viewBox={`0 0 ${BLOCK_W} ${BLOCK_H}`} overflow="visible">
         {block.type === 'CRANE_TROLLEY' && <CraneTrolleyShape active={isActive} />}

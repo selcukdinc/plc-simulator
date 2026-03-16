@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDrop } from 'react-dnd';
 import { useSelector, useDispatch } from 'react-redux';
 import { Store, SceneBlockType, SensorType } from '../../interface';
@@ -6,6 +6,8 @@ import { ADD_SCENE_BLOCK, ADD_SENSOR_BLOCK } from '../../store/types';
 import SceneBlock from './SceneBlock';
 import SensorBlock from './SensorBlock';
 import SceneBlockPalette from './SceneBlockPalette';
+import PropertiesSceneBlock from '../properties/PropertiesSceneBlock';
+import PropertiesSensorBlock from '../properties/PropertiesSensorBlock';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -36,6 +38,8 @@ const SceneCanvas: React.FC = () => {
   const dispatch = useDispatch();
   const blocks = useSelector((state: Store) => state.scene.blocks);
   const sensors = useSelector((state: Store) => state.scene.sensors);
+  const [blockPropsId, setBlockPropsId] = useState<string | null>(null);
+  const [sensorPropsId, setSensorPropsId] = useState<string | null>(null);
 
   const getCanvasCoords = (monitor: any): { x: number; y: number } => {
     const offset = monitor.getSourceClientOffset();
@@ -87,17 +91,31 @@ const SceneCanvas: React.FC = () => {
         <SVGCanvas width="100%" height="100%">
           {/* Sensors rendered below blocks */}
           {Object.keys(sensors).map((id) => (
-            <SensorBlock key={id} sensorId={id} />
+            <SensorBlock key={id} sensorId={id} onDoubleClick={setSensorPropsId} />
           ))}
           {/* Animated machine blocks */}
           {Object.keys(blocks).map((id) => (
-            <SceneBlock key={id} blockId={id} />
+            <SceneBlock key={id} blockId={id} onDoubleClick={setBlockPropsId} />
           ))}
         </SVGCanvas>
         <div style={{ position: 'absolute', bottom: 8, right: 8, fontSize: 11, color: 'var(--color-text-muted, #888)', pointerEvents: 'none' }}>
-          Makine ve sensör bloğunu sürükleyip bırak • Blok özelliklerinden değişken ata
+          Sürükle-bırak • Çift tıkla → özellikler
         </div>
       </CanvasWrapper>
+      {blockPropsId && (
+        <PropertiesSceneBlock
+          blockId={blockPropsId}
+          open={true}
+          onClose={() => setBlockPropsId(null)}
+        />
+      )}
+      {sensorPropsId && (
+        <PropertiesSensorBlock
+          sensorId={sensorPropsId}
+          open={true}
+          onClose={() => setSensorPropsId(null)}
+        />
+      )}
     </Container>
   );
 };
